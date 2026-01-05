@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Tabs from '../../components/ui/Tabs';
+import { PageHeader } from '../../components/ui/Common';
 import PnpTheory from './PnpTheory';
 import PnpVisualizer from './PnpVisualizer';
 
@@ -12,7 +13,11 @@ const PnpLayout = () => {
     ];
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div>
+            <PageHeader
+                title="9. Karmaşıklık Teorisi (P vs NP)"
+                subtitle="Bilgisayar bilimlerinin en derin problemlerinden biri olan P vs NP ve zor problemlerin dünyasına giriş yapın."
+            />
             <Tabs
                 tabs={tabs}
                 activeTab={activeTab}

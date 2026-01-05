@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
+import { Card, Badge } from '../../components/ui/Common';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, CartesianGrid } from 'recharts';
-import { ChevronsUp, AlertTriangle, CheckCircle, Zap } from 'lucide-react';
+import { CornerDownRight, ChevronsUp, AlertTriangle, CheckCircle, Zap } from 'lucide-react';
 
 const Classes = () => {
     // 3.2. Karmaşıklık Sınıfları (Küçükten Büyüğe Sıralama) - 10 MADDE
@@ -30,10 +30,16 @@ const Classes = () => {
 
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="3.2 Karmaşıklık Sınıfları"
-                subtitle="Algoritma dünyasının hız limitleri. O(1)'den O(n^n)'e uzanan performans hiyerarşisi."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>3.2 Karmaşıklık Sınıfları</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Algoritma dünyasının hız limitleri. O(1)'den O(n^n)'e uzanan performans hiyerarşisi.</p>
+                </div>
+            </div>
 
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>
                 <Card>

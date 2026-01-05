@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
-import { Play, RotateCcw, MousePointer2, Eraser, Info } from 'lucide-react';
+import { Card, Badge } from '../../components/ui/Common';
+import { CornerDownRight, Play, RotateCcw, MousePointer2, Eraser, Info } from 'lucide-react';
 import { bfs, dfs, dijkstra, astar, greedyBestFirst, getNodesInShortestPathOrder } from './algorithms';
 
 // Grid Constants
@@ -218,6 +218,16 @@ const SearchVisualizer = () => {
 
     return (
         <div className="animate-fade-in" onMouseUp={handleMouseUp}>
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>5.3. Arama Algoritmaları Simülatörü</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Harita üzerinde engeller oluşturun ve hazineye giden en kısa yolu bulun.</p>
+                </div>
+            </div>
             {/* Kontrol ve İstatistik */}
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-md)' }}>
                 <Card>

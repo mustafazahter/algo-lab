@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
+import { Card, Badge } from '../../components/ui/Common';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { TrendingUp, ArrowUpRight, Scale, Info, Car, Truck, Bike } from 'lucide-react';
+import { CornerDownRight, TrendingUp, ArrowUpRight, Scale, Info, Car, Truck, Bike } from 'lucide-react';
 
 const Asymptotic = () => {
     const [graphPoints] = useState(() => {
@@ -20,10 +20,16 @@ const Asymptotic = () => {
 
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="3.1 Asimptotik Notasyonlar"
-                subtitle="Algoritmaların performansını donanım gücünden (GHz, RAM) bağımsız olarak, sadece girdi boyutu (n) büyüdükçe nasıl davrandığına göre ölçme sanatıdır."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>3.1 Asimptotik Notasyonlar</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Algoritmaların performansını sadece girdi boyutu (n) büyüdükçe nasıl davrandığına göre ölçme sanatıdır.</p>
+                </div>
+            </div>
 
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>
 

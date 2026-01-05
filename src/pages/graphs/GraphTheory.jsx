@@ -1,16 +1,22 @@
 import React from 'react';
-import { Card, Badge, PageHeader } from '../../components/ui/Common';
-import { Network, Map, Navigation, ArrowRightLeft, Globe, Zap } from 'lucide-react';
+import { Card, Badge } from '../../components/ui/Common';
+import { CornerDownRight, Network, Map, Navigation, ArrowRightLeft, Globe, Zap } from 'lucide-react';
 import SimpleGraph from '../../components/ui/SimpleGraph';
 
 const GraphTheory = () => {
     return (
         <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
 
-            <PageHeader
-                title="7. Graf Algoritmaları"
-                subtitle="Şehirler ve Yollar: Karmaşık problemlerin en basit modeli."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>7.1 Graf Temelleri ve Tanımlar</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Şehirler ve Yollar: Karmaşık problemlerin en basit modeli.</p>
+                </div>
+            </div>
 
             {/* ANA AÇIKLAMA */}
             <section>

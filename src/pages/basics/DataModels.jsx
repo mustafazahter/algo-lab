@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, PageHeader } from '../../components/ui/Common';
+import { Card } from '../../components/ui/Common';
+import { CornerDownRight } from 'lucide-react';
 
 const MODELS = [
     {
@@ -14,7 +15,6 @@ const MODELS = [
                 <circle cx="140" cy="80" r="15" fill="var(--bg-card)" stroke="var(--primary)" strokeWidth="2" />
                 <circle cx="40" cy="130" r="10" fill="var(--bg-card)" stroke="var(--text-secondary)" />
                 <circle cx="80" cy="130" r="10" fill="var(--bg-card)" stroke="var(--text-secondary)" />
-                {/* Lines */}
                 <line x1="100" y1="35" x2="60" y2="65" stroke="var(--text-secondary)" />
                 <line x1="100" y1="35" x2="140" y2="65" stroke="var(--text-secondary)" />
                 <line x1="60" y1="95" x2="40" y2="120" stroke="var(--text-secondary)" />
@@ -33,7 +33,6 @@ const MODELS = [
                 <circle cx="50" cy="70" r="15" fill="var(--accent)" />
                 <circle cx="150" cy="70" r="15" fill="var(--bg-card)" stroke="var(--primary)" strokeWidth="2" />
                 <circle cx="100" cy="130" r="15" fill="var(--bg-card)" stroke="var(--accent)" strokeWidth="2" />
-
                 <line x1="100" y1="35" x2="50" y2="55" stroke="var(--text-secondary)" />
                 <line x1="100" y1="35" x2="150" y2="55" stroke="var(--text-secondary)" />
                 <line x1="50" y1="85" x2="100" y2="115" stroke="var(--text-secondary)" />
@@ -84,10 +83,16 @@ const MODELS = [
 const DataModels = () => {
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="1.2 Veri Modelleri"
-                subtitle="Verinin organize edilmesi ve saklanması için kullanılan 4 temel yapı."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>1.2. Veri Modelleri</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Verinin organize edilmesi ve saklanması için kullanılan 4 temel yapı.</p>
+                </div>
+            </div>
 
             <div className="grid-responsive">
                 {MODELS.map((model) => (

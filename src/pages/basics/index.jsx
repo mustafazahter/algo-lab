@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Tabs from '../../components/ui/Tabs';
+import { PageHeader } from '../../components/ui/Common';
 import AlgorithmProperties from './AlgorithmProperties';
 import DataModels from './DataModels';
 import BigData from './BigData';
@@ -15,6 +16,10 @@ const BasicsLayout = () => {
 
     return (
         <div>
+            <PageHeader
+                title="1. Temel Kavramlar"
+                subtitle="Algoritma dünyasına giriş yapın: Temel özellikler, veri modelleri ve büyük veri kavramlarını öğrenin."
+            />
             <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
 
             {activeTab === 'algo' && <AlgorithmProperties />}

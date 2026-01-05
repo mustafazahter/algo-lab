@@ -1,16 +1,22 @@
 import React from 'react';
-import { Card, Badge, PageHeader } from '../../components/ui/Common';
-import { Puzzle, Clock, CheckCircle, AlertTriangle, Zap, Key, Lock } from 'lucide-react';
+import { Card, Badge } from '../../components/ui/Common';
+import { CornerDownRight, Puzzle, Clock, CheckCircle, AlertTriangle, Zap, Key, Lock } from 'lucide-react';
 
 const PnpTheory = () => {
     return (
         <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
 
             {/* Header Section */}
-            <PageHeader
-                title="9. Karmaşıklık Teorisi (P vs NP)"
-                subtitle="Bilgisayar bilimlerinin en büyük çözülememiş problemi: P = NP mi?"
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>9.1 Karmaşıklık Teorisi (P vs NP)</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Bilgisayar bilimlerinin en büyük çözülememiş problemi: P = NP mi?</p>
+                </div>
+            </div>
 
             {/* Main Content Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '24px' }}>

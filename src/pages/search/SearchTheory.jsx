@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, Badge } from '../../components/ui/Common';
-import { Share2, ArrowDown, ArrowRight, Compass, Search as SearchIcon } from 'lucide-react';
+import { Share2, ArrowDown, ArrowRight, CornerDownRight, Compass, Search as SearchIcon } from 'lucide-react';
 
 const TreeVisualization = () => {
     const [activeNode, setActiveNode] = useState(null);
@@ -154,12 +154,15 @@ const SearchTheory = () => {
 
             {/* 1. Kategori: Bilgisiz (Uninformed) Algoritmalar */}
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '8px', color: 'var(--primary)' }}>
-                        <SearchIcon size={24} />
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>5.1. Bilgisiz (Kör) Arama - Uninformed</h2>
-                    <Badge type="default">Veriye Bakmaz</Badge>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>5.1. Bilgisiz (Kör) Arama - Uninformed</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Veriye bakmadan, sistematik olarak tüm yolları tarayan algoritmalar.</p>
+                    </div>
                 </div>
                 <Card>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
@@ -204,12 +207,15 @@ const SearchTheory = () => {
 
             {/* 2. Kategori: Bilgili (Informed) Algoritmalar */}
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px', color: 'var(--success)' }}>
-                        <Compass size={24} />
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>5.2. Bilgili (Sezgisel) Arama - Informed</h2>
-                    <Badge type="success">Hedefi Tahmin Eder</Badge>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>5.2. Bilgili (Sezgisel) Arama - Informed</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Hedefin konumunu tahmin eden sezgisel fonksiyonlar kullanarak performansı optimize eden algoritmalar.</p>
+                    </div>
                 </div>
                 <Card>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
+import { Card, Badge } from '../../components/ui/Common';
 import { Download, Upload, CheckCircle2, Zap, StopCircle, Search, Play, ArrowRight, CornerDownRight } from 'lucide-react';
 
 const AlgorithmProperties = () => {
@@ -69,10 +69,16 @@ const AlgorithmProperties = () => {
 
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="1.1 Algoritmanın Temel Özellikleri"
-                subtitle="Bir prosedürün 'Algoritma' sayılabilmesi için sağlaması gereken 5 altın kural."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>1.1. Algoritmanın Temel Özellikleri</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Bir prosedürün 'Algoritma' sayılabilmesi için gereken 5 altın kural.</p>
+                </div>
+            </div>
 
             {/* Özellik Kartları */}
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>

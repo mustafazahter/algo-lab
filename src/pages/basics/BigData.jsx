@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, PageHeader } from '../../components/ui/Common';
+import { Card } from '../../components/ui/Common';
+import { CornerDownRight } from 'lucide-react';
 
 const FIVE_V = [
     { letter: 'V', word: 'ariety', title: 'Çeşitlilik', desc: 'Farklı veri tipleri: Yapısal (SQL), Yarı-Yapısal (JSON), Yapısal Olmayan (Log).', color: 'var(--primary)' },
@@ -12,10 +13,16 @@ const FIVE_V = [
 const BigData = () => {
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="1.3 Büyük Veri (Big Data)"
-                subtitle="5V Kuralı: Modern dünyada büyük veriyi tanımlayan 5 temel bileşen."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>1.3. Büyük Veri (Big Data)</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>5V Kuralı: Modern dünyada büyük veriyi tanımlayan 5 temel bileşen.</p>
+                </div>
+            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                 {FIVE_V.map((item, idx) => (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Badge } from '../../components/ui/Common';
-import { Network, ArrowDown, GitMerge, ListOrdered } from 'lucide-react';
+import { Network, ArrowDown, GitMerge, ListOrdered, CornerDownRight } from 'lucide-react';
 
 const TreeTheory = () => {
     return (
@@ -8,11 +8,15 @@ const TreeTheory = () => {
 
             {/* 8.1 Ağaç Gezinme */}
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(34, 197, 94, 0.1)', borderRadius: '8px', color: 'var(--success)' }}>
-                        <Network size={24} />
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>8.1. Ağaç Gezinme (Tree Traversal)</h2>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.1. Ağaç Gezinme (Tree Traversal)</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Düğümler üzerinde dolaşma stratejileri: Preorder, Inorder ve Postorder.</p>
+                    </div>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
@@ -113,11 +117,15 @@ const TreeTheory = () => {
 
             {/* 8.2 Heap */}
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(249, 115, 22, 0.1)', borderRadius: '8px', color: 'var(--accent-warning)' }}>
-                        <ListOrdered size={24} />
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>8.2. Heap (Yığın) & Dizi Temelli Ağaçlar</h2>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.2. Heap (Yığın) & Dizi Temelli Ağaçlar</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Maksimum ve minimum değerlere hızlı erişim sağlayan ağaç yapıları.</p>
+                    </div>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '20px' }}>
@@ -157,11 +165,15 @@ const TreeTheory = () => {
 
             {/* 8.3 Dengeli Ağaçlar */}
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '8px', color: 'var(--accent-primary)' }}>
-                        <GitMerge size={24} />
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>8.3. Dengeli Ağaçlar (Balanced Trees)</h2>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.3. Dengeli Ağaçlar (Balanced Trees)</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Arama performansını O(log N) seviyesinde tutmak için ağacı dengeleme yöntemleri.</p>
+                    </div>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>

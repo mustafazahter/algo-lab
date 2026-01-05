@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Tabs from '../../components/ui/Tabs';
+import { PageHeader } from '../../components/ui/Common';
 import Asymptotic from './Asymptotic';
 import Classes from './Classes';
 
@@ -13,6 +14,10 @@ const ComplexityLayout = () => {
 
     return (
         <div>
+            <PageHeader
+                title="3. Karmaşıklık Analizi"
+                subtitle="Algoritmaların verimliliğini ölçmek için kullanılan asimptotik notasyonları ve zaman/alan analizini öğrenin."
+            />
             <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
 
             {activeTab === 'asymptotic' && <Asymptotic />}

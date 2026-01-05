@@ -1,16 +1,22 @@
 import React from 'react';
-import { Card, Badge, PageHeader } from '../../components/ui/Common';
-import { Anchor, Share2, Zap, ArrowRight, Truck, Database, GitBranch, Network } from 'lucide-react';
+import { Card, Badge } from '../../components/ui/Common';
+import { CornerDownRight, Anchor, Share2, Zap, ArrowRight, Truck, Database, GitBranch, Network } from 'lucide-react';
 import SimpleGraph from '../../components/ui/SimpleGraph';
 
 const MSTTheory = () => {
     return (
         <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
 
-            <PageHeader
-                title="7.1. Minimum Spanning Tree (MST)"
-                subtitle="Adalar ve Köprüler: Tüm düğümleri en az maliyetle bağlama sanatı."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>7.2 Minimum Spanning Tree (MST)</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Adalar ve Köprüler: Tüm düğümleri en az maliyetle bağlama sanatı.</p>
+                </div>
+            </div>
 
             {/* MST HİKAYESİ */}
             <section>

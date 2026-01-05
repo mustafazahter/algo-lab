@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, PageHeader } from '../../components/ui/Common';
-import { Play, Square, Shuffle, ScrollText, CheckCircle, XCircle, Search, Info } from 'lucide-react';
+import { Card } from '../../components/ui/Common';
+import { CornerDownRight, Play, Square, Shuffle, ScrollText, CheckCircle, XCircle, Search, Info } from 'lucide-react';
 import {
     generateRandomGraphData,
     getPrimAnimations,
@@ -213,10 +213,16 @@ const GraphVisualizer = () => {
 
     return (
         <div style={containerStyle} className="animate-fade-in space-y-6">
-            <PageHeader
-                title="Graph Algorithms Simulator"
-                subtitle="Popüler graf algoritmalarını canlı izleyin, kenar ağırlıklarını ve düğümleri görün."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>7.3 Graf Algoritmaları Simülatörü</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Popüler graf algoritmalarını canlı izleyin, kenar ağırlıklarını ve düğümleri görün.</p>
+                </div>
+            </div>
 
             {/* CONTROL PANEL */}
             <div style={cardStyle}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Tabs from '../../components/ui/Tabs';
-import { Card } from '../../components/ui/Common';
+import { Card, PageHeader } from '../../components/ui/Common';
 
 import BruteForce from './BruteForce';
 import DivideConquer from './DivideConquer';
@@ -23,6 +23,10 @@ const DesignLayout = () => {
 
     return (
         <div>
+            <PageHeader
+                title="2. Tasarım Yöntemleri"
+                subtitle="Problem çözme yaklaşımlarını ve farklı algoritma tasarım tekniklerini interaktif olarak inceleyin."
+            />
             <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
 
             {activeTab === 'brute' && <BruteForce />}

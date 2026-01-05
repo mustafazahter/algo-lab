@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, PageHeader } from '../../components/ui/Common';
-import { Play, RotateCcw, Swords, Square, RefreshCw } from 'lucide-react';
+import { CornerDownRight, Play, RotateCcw, Swords, Square, RefreshCw } from 'lucide-react';
 import {
     getBubbleSortAnimations,
     getSelectionSortAnimations,
@@ -217,12 +216,13 @@ const SortRace = () => {
 
     return (
         <div className="animate-fade-in">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-                <div style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '8px', color: 'var(--danger)' }}>
-                    <Swords size={24} />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
                 </div>
                 <div>
-                    <h2 style={{ margin: 0 }}>Algoritma Yarışı (Duel Mode)</h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>6.4. Algoritma Yarışı (Duel Mode)</h2>
                     <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>İki algoritmayı aynı veri setinde kafa kafaya yarıştır.</p>
                 </div>
             </div>

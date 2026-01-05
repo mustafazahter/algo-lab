@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
-import { Lock, Unlock, Zap, BrainCircuit, Activity, RotateCcw } from 'lucide-react';
+import { Card, Badge } from '../../components/ui/Common';
+import { CornerDownRight, Lock, Unlock, Zap, BrainCircuit, Activity, RotateCcw } from 'lucide-react';
 
 const BruteForce = () => {
     const [password, setPassword] = useState('123');
@@ -66,10 +66,16 @@ const BruteForce = () => {
 
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="2.1 Kaba Kuvvet (Brute Force)"
-                subtitle="Zeka veya strateji kullanmadan, olası tüm çözüm adaylarını tek tek deneyerek sonuca ulaşma yöntemidir."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.1 Kaba Kuvvet (Brute Force)</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Zeka veya strateji kullanmadan, olası tüm çözüm adaylarını tek tek deneyerek sonuca ulaşma yöntemidir.</p>
+                </div>
+            </div>
 
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>
                 <Card>

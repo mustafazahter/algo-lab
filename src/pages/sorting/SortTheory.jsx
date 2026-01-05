@@ -1,17 +1,21 @@
 import React from 'react';
 import { Card, Badge } from '../../components/ui/Common';
-import { BarChart2, ArrowRight } from 'lucide-react';
+import { BarChart2, ArrowRight, CornerDownRight } from 'lucide-react';
 
 const SortTheory = () => {
     return (
         <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
 
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '8px', color: 'var(--primary)' }}>
-                        <BarChart2 size={24} />
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>6.1. Sıralama Karşılaştırma Tablosu</h2>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>6.1. Sıralama Karşılaştırma Tablosu</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Algoritmaların zaman ve alan karmaşıklıkları ile çalışma mantıklarının özeti.</p>
+                    </div>
                 </div>
                 <Card>
                     <div style={{ overflowX: 'auto' }}>
@@ -68,9 +72,15 @@ const SortTheory = () => {
             </section>
 
             <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <h2 style={{ margin: 0 }}>6.2. Trace Örnekleri (Adım Adım İzleme)</h2>
-                    <Badge>Sınav Odaklı</Badge>
+                {/* Alt Başlık Bölümü */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                        <CornerDownRight size={24} />
+                    </div>
+                    <div>
+                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>6.2. Trace Örnekleri (Adım Adım İzleme)</h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Sınav odaklı adım adım algoritma işleyiş analizleri.</p>
+                    </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
                     <Card>

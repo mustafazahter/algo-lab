@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
-import { GitMerge, Scissors, Layers, PlayCircle } from 'lucide-react';
+import { Card, Badge } from '../../components/ui/Common';
+import { CornerDownRight, GitMerge, Scissors, Layers, PlayCircle } from 'lucide-react';
 
 const DivideConquer = () => {
     const [array, setArray] = useState([38, 27, 43, 3, 9, 82, 10]);
@@ -72,10 +72,16 @@ const DivideConquer = () => {
 
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="2.2 Böl ve Yönet (Divide & Conquer)"
-                subtitle=" 'Büyük problemleri yönetilebilir küçük parçalara böl, çöz ve birleştir.' - Julius Caesar'dan Algoritmalara"
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.2 Böl ve Yönet (Divide & Conquer)</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>"Büyük problemleri yönetilebilir küçük parçalara böl, çöz ve birleştir."</p>
+                </div>
+            </div>
 
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>
                 <Card>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Tabs from '../../components/ui/Tabs';
+import { PageHeader } from '../../components/ui/Common';
 import TreeTheory from './TreeTheory';
 import TreeVisualizer from './TreeVisualizer';
 
@@ -13,6 +14,10 @@ const TreesLayout = () => {
 
     return (
         <div>
+            <PageHeader
+                title="8. Ağaçlar & Heap"
+                subtitle="Hiyerarşik veri yapılarını ve bellek yönetiminde kritik rol oynayan Heap yapılarını inceleyin."
+            />
             <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
 
             <div style={{ marginTop: '20px' }}>

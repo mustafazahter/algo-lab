@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, PageHeader, Badge } from '../../components/ui/Common';
+import { Card, Badge } from '../../components/ui/Common';
 import { calculateGreedyCoinChange } from '../../utils/algorithms';
-import { Coins, ArrowRight, Zap, AlertTriangle } from 'lucide-react';
+import { CornerDownRight, Coins, ArrowRight, Zap, AlertTriangle } from 'lucide-react';
 
 const COINS = [50, 20, 10, 5, 1];
 
@@ -36,10 +36,16 @@ const Greedy = () => {
 
     return (
         <div className="animate-fade-in">
-            <PageHeader
-                title="2.4 Açgözlü Yaklaşım (Greedy)"
-                subtitle="Her adımda, o an için en kazançlı görünen seçeneği (Local Optimum) tercih ederek sonuca ulaşma stratejisi."
-            />
+            {/* Alt Başlık Bölümü */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={24} />
+                </div>
+                <div>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.4 Açgözlü Yaklaşım (Greedy)</h2>
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Her adımda, o an için en kazançlı görünen seçeneği tercih ederek sonuca ulaşma stratejisi.</p>
+                </div>
+            </div>
 
             <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>
                 <Card>
