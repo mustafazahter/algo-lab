@@ -84,54 +84,98 @@ const Classes = () => {
 
             <h2 style={{ fontSize: '1.8rem', marginBottom: 'var(--space-lg)' }}>📊 Büyüme Hızı Karşılaştırması (10 Sınıf)</h2>
 
-            <Card style={{ height: '600px', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ flex: 1, minHeight: 0 }}>
+            <Card style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ height: '500px', minHeight: '400px' }}>
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={data} layout="vertical" margin={{ top: 20, right: 30, left: 60, bottom: 20 }}>
+                        <BarChart
+                            data={data}
+                            layout="vertical"
+                            margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
+                            barGap={8}
+                        >
                             <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="var(--border-light)" />
-                            <XAxis type="number" hide />
+                            <XAxis type="number" hide domain={[0, 1000]} />
                             <YAxis
                                 dataKey="name"
                                 type="category"
-                                width={100}
+                                width={110}
                                 stroke="var(--text-primary)"
-                                tick={{ fontSize: 13, fontWeight: 600 }}
+                                tick={{ fontSize: 14, fontWeight: 700, fill: 'var(--text-primary)' }}
+                                interval={0}
+                                axisLine={false}
+                                tickLine={false}
                             />
                             <Tooltip
-                                contentStyle={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--text-primary)' }}
-                                cursor={{ fill: 'var(--bg-secondary)' }}
+                                contentStyle={{
+                                    backgroundColor: 'var(--bg-card)',
+                                    border: '1px solid var(--border-light)',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
+                                    color: 'var(--text-primary)'
+                                }}
+                                cursor={{ fill: 'var(--bg-secondary)', opacity: 0.4 }}
                                 formatter={(value, name, props) => [props.payload.desc, 'Sınıf']}
-                                labelStyle={{ color: 'var(--primary)', fontWeight: 'bold' }}
+                                labelStyle={{ color: 'var(--primary)', fontWeight: 'bold', marginBottom: '4px' }}
                             />
-                            <Bar dataKey="val" radius={[0, 4, 4, 0]} barSize={35} animationDuration={1500}>
+                            <Bar
+                                dataKey="val"
+                                radius={[0, 6, 6, 0]}
+                                barSize={26}
+                                animationDuration={1800}
+                                animationEasing="ease-out"
+                            >
                                 {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={getColor(entry.type)} />
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={getColor(entry.type)}
+                                        style={{ transition: 'all 0.3s ease' }}
+                                    />
                                 ))}
                             </Bar>
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
 
-                {/* Legend / Açıklama Alt Bilgisi */}
+                {/* Legend / Açıklama Alt Bilgisi - Geliştirilmiş Tasarım */}
                 <div style={{
-                    marginTop: '20px',
-                    padding: '15px',
+                    padding: '20px',
                     background: 'var(--bg-secondary)',
-                    borderRadius: 'var(--radius-md)',
+                    borderRadius: 'var(--radius-lg)',
+                    border: '1px solid var(--border-light)',
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '10px',
-                    fontSize: '0.85rem'
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                    gap: '16px',
                 }}>
                     {data.map((d) => (
-                        <div key={d.name} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: getColor(d.type) }}></div>
-                            <span style={{ fontWeight: 'bold', minWidth: '60px' }}>{d.name}:</span>
-                            <span style={{ color: 'var(--text-muted)' }}>{d.detail}</span>
+                        <div key={d.name} style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '12px',
+                            padding: '8px',
+                            borderRadius: '8px',
+                            transition: 'background 0.2s',
+                            cursor: 'default'
+                        }}
+                            className="hover-bg-subtle"
+                        >
+                            <div style={{
+                                width: '12px',
+                                height: '12px',
+                                borderRadius: '50%',
+                                backgroundColor: getColor(d.type),
+                                marginTop: '4px',
+                                flexShrink: 0,
+                                boxShadow: `0 0 8px ${getColor(d.type)}44`
+                            }}></div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                                <span style={{ fontWeight: '800', fontSize: '0.95rem', color: 'var(--text-primary)' }}>{d.name}</span>
+                                <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: '1.4' }}>{d.detail}</span>
+                            </div>
                         </div>
                     ))}
                 </div>
             </Card>
+
         </div>
     );
 };
