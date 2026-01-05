@@ -1,16 +1,79 @@
-# React + Vite
+# İnteraktif Algoritma Analiz Platformu
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
+![University](https://img.shields.io/badge/Turgut_Özal_Üniversitesi-Bilgisayar_Mühendisliği-blue?style=flat-square)
+![Course](https://img.shields.io/badge/Ders-Algoritma_ve_Analiz-orange?style=flat-square)
 
-Currently, two official plugins are available:
+> **"Algoritmaları sadece kodlama, onları hisset."**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bu proje, **Turgut Özal Üniversitesi Bilgisayar Mühendisliği** bölümü **Algoritma ve Analiz** dersi kapsamında, teorik konseptlerin (Big O, Sorting, P vs NP vb.) görsel ve interaktif bir şekilde anlaşılması amacıyla geliştirilmiştir. Modern web teknolojileri kullanılarak, matematiğin estetik ile buluştuğu bir öğrenme deneyimi sunar.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Özellikler ve Modüller
 
-## Expanding the ESLint configuration
+Proje, algoritma dünyasını parçalara ayıran özel modüller içerir:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Modül | Açıklama |
+|-------|----------|
+| **Asimptotik Analiz** | Big O, Omega ve Theta notasyonlarının interaktif grafiklerle incelenmesi. |
+| **Sıralama (Sorting)** | Merge Sort, Quick Sort gibi algoritmaların adım adım görselleştirilmesi ve "Sort Race" modu. |
+| **P vs NP** | Gezgin Satıcı Problemi (TSP) üzerinden P ve NP sınıflarının, deterministik olmayan algoritmaların analizi. |
+| **Ağaç Yapıları** | Binary Search Tree ve diğer veri yapılarının dinamik simülasyonları. |
+| **Arama (Search)** | Linear ve Binary Search algoritmalarının görsel karşılaştırması. |
+
+---
+
+## İnsan ve Yapay Zeka Sentezi
+
+Bu platform, sadece bir yazılım projesi değil, aynı zamanda **insan yaratıcılığı ile yapay zeka gücünün birleşimidir**.
+
+Geliştirme sürecinde **Gemini 3 Pro** teknolojisinden yararlanılmıştır. Proje, modern algoritmik düşünce yapısını yapay zeka desteğiyle optimize eden bir **"İnsan-AI Sentezi"** örneğidir.
+
+---
+
+## Kurulum ve Çalıştırma
+
+Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları takip edin.
+
+### Gereksinimler
+- [Node.js](https://nodejs.org/) (Sürüm 16 veya üzeri önerilir)
+
+### Adım 1: Projeyi İndirin ve Klasöre Gidin
+Terminali açın ve proje dizinine gidin:
+```bash
+cd algo-lab
+```
+
+### Adım 2: Bağımlılıkları Yükleyin
+Proje paketlerini yüklemek için standart `npm` komutunu kullanın:
+```bash
+npm install
+# Veya pnpm kullanıyorsanız:
+# pnpm install
+```
+
+### Adım 3: Uygulamayı Başlatın
+Geliştirme sunucusunu ayağa kaldırın:
+```bash
+npm run dev
+```
+
+Linke tıklayarak (genellikle `http://localhost:5173`) uygulamayı tarayıcınızda görüntüleyebilirsiniz.
+
+---
+
+## Teknoloji Yığını
+
+Bu proje "Avant-Garde" tasarım prensipleriyle, aşağıdaki teknolojiler kullanılarak inşa edilmiştir:
+
+- **Core:** React 18, Vite
+- **Styling:** TailwindCSS, Custom CSS Modules
+- **Animation:** Framer Motion (Kompleks fizik ve geçiş animasyonları için)
+- **Icons:** Lucide React
+
+---
+
+<div align="center">
+  <sub>Turgut Özal Üniversitesi • Bilgisayar Mühendisliği • 2026</sub>
+</div>
