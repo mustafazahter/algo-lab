@@ -1,0 +1,212 @@
+import React, { useState, useEffect } from 'react';
+import { Card, PageHeader, Badge } from '../../components/ui/Common';
+import { Play, Pause, RotateCcw, Code, ChevronRight } from 'lucide-react';
+
+const LoopAnalysis = () => {
+    const [algo, setAlgo] = useState('linear'); // linear, quadratic, log
+    const [n, setN] = useState(5);
+    const [variables, setVariables] = useState({ i: 0, j: 0 });
+    const [count, setCount] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const [activeLine, setActiveLine] = useState(-1);
+
+    const codes = {
+        linear: [
+            "int count = 0;",
+            "for (int i = 0; i < n; i++) {",
+            "    count++;",
+            "}"
+        ],
+        quadratic: [
+            "int count = 0;",
+            "for (int i = 0; i < n; i++) {",
+            "    for (int j = 0; j < n; j++) {",
+            "        count++;",
+            "    }",
+            "}"
+        ],
+        log: [
+            "int count = 0;",
+            "for (int i = 1; i < n; i = i * 2) {",
+            "    count++;",
+            "}"
+        ]
+    };
+
+    useEffect(() => {
+        let interval;
+        if (isRunning) {
+            interval = setInterval(() => {
+                step();
+            }, 600); // Adım hızı
+        }
+        return () => clearInterval(interval);
+    }, [isRunning, algo, variables, count]);
+
+    const reset = () => {
+        setVariables({ i: algo === 'log' ? 1 : 0, j: 0 });
+        setCount(0);
+        setActiveLine(1); // Start loop header
+        setIsRunning(false);
+    };
+
+    const step = () => {
+        if (algo === 'linear') {
+            const { i } = variables;
+            if (activeLine === 1) { // for (i < n)
+                if (i < n) {
+                    setActiveLine(2); // count++
+                } else {
+                    setActiveLine(3); // end
+                    setIsRunning(false);
+                }
+            } else if (activeLine === 2) {
+                setCount(prev => prev + 1);
+                setVariables(prev => ({ ...prev, i: prev.i + 1 }));
+                setActiveLine(1); // loop back
+            }
+        }
+        else if (algo === 'quadratic') {
+            const { i, j } = variables;
+            if (activeLine === 1) { // Outer Loop
+                if (i < n) {
+                    setActiveLine(2); // Inner Loop header
+                } else {
+                    setActiveLine(5); // End
+                    setIsRunning(false);
+                }
+            } else if (activeLine === 2) { // Inner Loop
+                if (j < n) {
+                    setActiveLine(3); // count++
+                } else {
+                    setVariables(prev => ({ ...prev, i: prev.i + 1, j: 0 }));
+                    setActiveLine(1); // Back to outer
+                }
+            } else if (activeLine === 3) { // count++
+                setCount(prev => prev + 1);
+                setVariables(prev => ({ ...prev, j: prev.j + 1 }));
+                setActiveLine(2); // Back to inner header
+            }
+        }
+        else if (algo === 'log') {
+            const { i } = variables;
+            if (activeLine === 1) { // for (i < n; i*2)
+                if (i < n) {
+                    setActiveLine(2); // count++
+                } else {
+                    setActiveLine(3); // end
+                    setIsRunning(false);
+                }
+            } else if (activeLine === 2) {
+                setCount(prev => prev + 1);
+                setVariables(prev => ({ ...prev, i: prev.i * 2 }));
+                setActiveLine(1); // loop back
+            }
+        }
+    };
+
+    const handleAlgoChange = (newAlgo) => {
+        setAlgo(newAlgo);
+        setVariables({ i: newAlgo === 'log' ? 1 : 0, j: 0 });
+        setCount(0);
+        setActiveLine(0);
+        setIsRunning(false);
+    };
+
+    return (
+        <div className="animate-fade-in">
+            <PageHeader
+                title="4. Kod Analizi ve Simülasyonu"
+                subtitle="Kod yapılarını çalıştırarak karmaşıklıklarının (O-Notasyonu) pratikte nasıl ölçüldüğünü görün."
+            />
+
+            <div className="grid-responsive" style={{ marginBottom: 'var(--space-2xl)' }}>
+                <button onClick={() => handleAlgoChange('linear')} style={{ textAlign: 'left' }}>
+                    <Card style={{ border: algo === 'linear' ? '2px solid var(--primary)' : '1px solid var(--border-light)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <h3 style={{ color: 'var(--primary)' }}>Lineer Döngü</h3>
+                            <Badge type="primary">O(n)</Badge>
+                        </div>
+                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Basit for döngüsü.</p>
+                    </Card>
+                </button>
+                <button onClick={() => handleAlgoChange('quadratic')} style={{ textAlign: 'left' }}>
+                    <Card style={{ border: algo === 'quadratic' ? '2px solid var(--danger)' : '1px solid var(--border-light)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <h3 style={{ color: 'var(--danger)' }}>İç İçe Döngü</h3>
+                            <Badge type="danger">O(n²)</Badge>
+                        </div>
+                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Nested Loop.</p>
+                    </Card>
+                </button>
+                <button onClick={() => handleAlgoChange('log')} style={{ textAlign: 'left' }}>
+                    <Card style={{ border: algo === 'log' ? '2px solid var(--success)' : '1px solid var(--border-light)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <h3 style={{ color: 'var(--success)' }}>Logaritmik</h3>
+                            <Badge type="success">O(log n)</Badge>
+                        </div>
+                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>i = i * 2 şeklinde artış.</p>
+                    </Card>
+                </button>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1fr', gap: 'var(--space-lg)' }}>
+                {/* Sol: Kod Görünümü */}
+                <Card style={{ fontFamily: 'monospace', background: 'var(--bg-card)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', color: 'var(--text-muted)' }}>
+                        <span>CODE TRACER</span>
+                        <span style={{ fontSize: '0.8rem' }}>n = {n}</span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {codes[algo].map((line, idx) => (
+                            <div key={idx} style={{
+                                padding: '4px 8px',
+                                background: activeLine === idx ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                                borderLeft: activeLine === idx ? '3px solid var(--accent)' : '3px solid transparent',
+                                color: activeLine === idx ? 'var(--text-primary)' : 'var(--text-secondary)',
+                                transition: 'all 0.2s',
+                                borderRadius: '0 4px 4px 0'
+                            }}>
+                                {line}
+                            </div>
+                        ))}
+                    </div>
+                </Card>
+
+                {/* Sağ: Değişkenler ve Kontrol */}
+                <Card>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-lg)' }}>
+                        <h3>Durum Paneli</h3>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                            <button onClick={() => setIsRunning(!isRunning)} style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '8px 16px', background: isRunning ? 'var(--warning)' : 'var(--success)', color: 'white', borderRadius: '4px', fontWeight: 'bold' }}>
+                                {isRunning ? <><Pause size={16} /> Duraklat</> : <><Play size={16} /> Çalıştır</>}
+                            </button>
+                            <button onClick={reset} style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '4px', color: 'var(--text-secondary)' }}>
+                                <RotateCcw size={16} />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+                        <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Değişken i</div>
+                            <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{variables.i}</div>
+                        </div>
+                        {algo === 'quadratic' && (
+                            <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                                <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Değişken j</div>
+                                <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{variables.j}</div>
+                            </div>
+                        )}
+                        <div style={{ gridColumn: 'span 2', background: 'var(--primary)', padding: '15px', borderRadius: '8px', textAlign: 'center', color: 'white' }}>
+                            <div style={{ opacity: 0.8, fontSize: '0.9rem' }}>Toplam İşlem (Count)</div>
+                            <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{count}</div>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </div>
+    );
+};
+
+export default LoopAnalysis;
