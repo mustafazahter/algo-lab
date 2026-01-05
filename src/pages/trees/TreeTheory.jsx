@@ -24,7 +24,7 @@ const TreeTheory = () => {
                             </div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>1. Preorder (Önce Kök)</h3>
                         </div>
-                        <div style={{ background: '#1e293b', padding: '12px', borderRadius: '8px', border: '1px solid #334155', marginBottom: '12px', fontFamily: 'monospace', color: '#60a5fa', fontWeight: 'bold' }}>
+                        <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-medium)', marginBottom: '12px', fontFamily: 'monospace', color: '#60a5fa', fontWeight: 'bold' }}>
                             Kök → Sol → Sağ
                         </div>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
@@ -39,7 +39,7 @@ const TreeTheory = () => {
                             </div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>2. Inorder (Ortada Kök)</h3>
                         </div>
-                        <div style={{ background: '#1e293b', padding: '12px', borderRadius: '8px', border: '1px solid #334155', marginBottom: '12px', fontFamily: 'monospace', color: '#c084fc', fontWeight: 'bold' }}>
+                        <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-medium)', marginBottom: '12px', fontFamily: 'monospace', color: '#c084fc', fontWeight: 'bold' }}>
                             Sol → Kök → Sağ
                         </div>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
@@ -54,7 +54,7 @@ const TreeTheory = () => {
                             </div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>3. Postorder (Sonda Kök)</h3>
                         </div>
-                        <div style={{ background: '#1e293b', padding: '12px', borderRadius: '8px', border: '1px solid #334155', marginBottom: '12px', fontFamily: 'monospace', color: '#fbbf24', fontWeight: 'bold' }}>
+                        <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-medium)', marginBottom: '12px', fontFamily: 'monospace', color: '#fbbf24', fontWeight: 'bold' }}>
                             Sol → Sağ → Kök
                         </div>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
@@ -74,20 +74,20 @@ const TreeTheory = () => {
 
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'flex-start' }}>
                             {/* Tree SVG */}
-                            <div style={{ flex: '0 0 auto', background: '#0f172a', padding: '20px', borderRadius: '12px', border: '1px solid #334155' }}>
+                            <div style={{ flex: '0 0 auto', background: 'var(--bg-secondary)', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-medium)' }}>
                                 <svg width="240" height="180" viewBox="0 0 240 180" style={{ overflow: 'visible' }}>
                                     {/* Edges */}
-                                    <line x1="120" y1="30" x2="70" y2="80" stroke="#475569" strokeWidth="2" />
-                                    <line x1="120" y1="30" x2="170" y2="80" stroke="#475569" strokeWidth="2" />
-                                    <line x1="70" y1="80" x2="40" y2="130" stroke="#475569" strokeWidth="2" />
-                                    <line x1="70" y1="80" x2="100" y2="130" stroke="#475569" strokeWidth="2" />
+                                    <line x1="120" y1="30" x2="70" y2="80" stroke="var(--text-muted)" strokeWidth="2" />
+                                    <line x1="120" y1="30" x2="170" y2="80" stroke="var(--text-muted)" strokeWidth="2" />
+                                    <line x1="70" y1="80" x2="40" y2="130" stroke="var(--text-muted)" strokeWidth="2" />
+                                    <line x1="70" y1="80" x2="100" y2="130" stroke="var(--text-muted)" strokeWidth="2" />
 
                                     {/* Nodes */}
-                                    <g><circle cx="120" cy="30" r="18" fill="#1e293b" stroke="#60a5fa" strokeWidth="2" /><text x="120" y="30" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">A</text></g>
-                                    <g><circle cx="70" cy="80" r="18" fill="#1e293b" stroke="#94a3b8" strokeWidth="2" /><text x="70" y="80" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">B</text></g>
-                                    <g><circle cx="170" cy="80" r="18" fill="#1e293b" stroke="#94a3b8" strokeWidth="2" /><text x="170" y="80" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">C</text></g>
-                                    <g><circle cx="40" cy="130" r="18" fill="#1e293b" stroke="#94a3b8" strokeWidth="2" /><text x="40" y="130" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">D</text></g>
-                                    <g><circle cx="100" cy="130" r="18" fill="#1e293b" stroke="#94a3b8" strokeWidth="2" /><text x="100" y="130" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">E</text></g>
+                                    <g><circle cx="120" cy="30" r="18" fill="var(--bg-card)" stroke="var(--primary)" strokeWidth="2" /><text x="120" y="30" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">A</text></g>
+                                    <g><circle cx="70" cy="80" r="18" fill="var(--bg-card)" stroke="var(--text-muted)" strokeWidth="2" /><text x="70" y="80" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">B</text></g>
+                                    <g><circle cx="170" cy="80" r="18" fill="var(--bg-card)" stroke="var(--text-muted)" strokeWidth="2" /><text x="170" y="80" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">C</text></g>
+                                    <g><circle cx="40" cy="130" r="18" fill="var(--bg-card)" stroke="var(--text-muted)" strokeWidth="2" /><text x="40" y="130" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">D</text></g>
+                                    <g><circle cx="100" cy="130" r="18" fill="var(--bg-card)" stroke="var(--text-muted)" strokeWidth="2" /><text x="100" y="130" dy=".35em" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="bold">E</text></g>
                                 </svg>
                             </div>
 

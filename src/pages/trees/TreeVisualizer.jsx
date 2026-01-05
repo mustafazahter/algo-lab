@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, RotateCw, Plus, Trash2, ArrowRight } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 const TreeVisualizer = () => {
+    const { theme } = useTheme();
     // Basic BST Logic
     class Node {
         constructor(value) {
@@ -165,17 +167,17 @@ const TreeVisualizer = () => {
         return (
             <g key={node.value} onClick={(e) => handleNodeClick(node.value, e)} style={{ cursor: isAnimating ? 'default' : 'pointer' }}>
                 {node.left && (
-                    <line x1={node.x} y1={node.y} x2={node.left.x} y2={node.left.y} stroke="#475569" strokeWidth="2" />
+                    <line x1={node.x} y1={node.y} x2={node.left.x} y2={node.left.y} stroke="var(--text-muted)" strokeWidth="2" />
                 )}
                 {node.right && (
-                    <line x1={node.x} y1={node.y} x2={node.right.x} y2={node.right.y} stroke="#475569" strokeWidth="2" />
+                    <line x1={node.x} y1={node.y} x2={node.right.x} y2={node.right.y} stroke="var(--text-muted)" strokeWidth="2" />
                 )}
                 {renderTree(node.left)}
                 {renderTree(node.right)}
                 <circle
                     cx={node.x} cy={node.y} r={nodeRadius}
-                    fill={isHighlight ? '#eab308' : (isSelected ? '#3b82f6' : '#1e293b')}
-                    stroke={isHighlight ? '#fde047' : (isSelected ? '#60a5fa' : '#94a3b8')}
+                    fill={isHighlight ? '#eab308' : (isSelected ? '#3b82f6' : 'var(--bg-card)')}
+                    stroke={isHighlight ? '#fde047' : (isSelected ? '#60a5fa' : 'var(--text-muted)')}
                     strokeWidth={isHighlight || isSelected ? 3 : 2}
                     style={{ transition: 'all 0.3s' }}
                 />
@@ -202,7 +204,7 @@ const TreeVisualizer = () => {
                                 justifyContent: 'center',
                                 cursor: 'pointer',
                                 boxShadow: '0 2px 4px rgba(0,0,0,0.5)',
-                                border: '2px solid #1e293b',
+                                border: '2px solid var(--bg-card)',
                                 animation: 'fade-in 0.2s'
                             }}
                             title="Sil"
@@ -230,8 +232,8 @@ const TreeVisualizer = () => {
     };
 
     const cardStyle = {
-        background: 'var(--bg-card, #1e293b)',
-        border: '1px solid var(--border-medium, #334155)',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border-medium)',
         borderRadius: '12px',
         padding: '20px',
         marginBottom: '24px',
@@ -315,13 +317,13 @@ const TreeVisualizer = () => {
                 {/* Visualization Area */}
                 <div
                     onClick={() => setSelectedNode(null)}
-                    style={{ ...cardStyle, padding: 0, height: '550px', overflow: 'hidden', position: 'relative', background: '#020617', border: '1px solid #1e293b' }}
+                    style={{ ...cardStyle, padding: 0, height: '550px', overflow: 'hidden', position: 'relative', background: 'var(--bg-secondary)', border: '1px solid var(--border-medium)' }}
                 >
                     <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
                         <defs>
                             <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                                <stop offset="0%" stopColor="#334155" />
-                                <stop offset="100%" stopColor="#1e293b" />
+                                <stop offset="0%" stopColor="var(--bg-secondary)" />
+                                <stop offset="100%" stopColor="var(--bg-card)" />
                             </radialGradient>
                             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                                 <feGaussianBlur stdDeviation="3" result="blur" />
@@ -330,7 +332,7 @@ const TreeVisualizer = () => {
                         </defs>
                         {renderTree(root)}
                     </svg>
-                    <div style={{ position: 'absolute', top: 20, left: 20, color: '#94a3b8', fontSize: '1rem', pointerEvents: 'none', fontWeight: 'bold' }}>
+                    <div style={{ position: 'absolute', top: 20, left: 20, color: 'var(--text-muted)', fontSize: '1rem', pointerEvents: 'none', fontWeight: 'bold' }}>
                         Binary Search Tree (BST)
                     </div>
                 </div>
