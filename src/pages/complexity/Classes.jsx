@@ -31,13 +31,13 @@ const Classes = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>3.2 Karmaşıklık Sınıfları</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Algoritma dünyasının hız limitleri. O(1)'den O(n^n)'e uzanan performans hiyerarşisi.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>3.2 Karmaşıklık Sınıfları</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Algoritma dünyasının hız limitleri. O(1)'den O(n^n)'e uzanan performans hiyerarşisi.</p>
                 </div>
             </div>
 
@@ -82,10 +82,10 @@ const Classes = () => {
                 </Card>
             </div>
 
-            <h2 style={{ fontSize: '1.8rem', marginBottom: 'var(--space-lg)' }}>📊 Büyüme Hızı Karşılaştırması (10 Sınıf)</h2>
+            <h2 className="text-subheading" style={{ marginBottom: 'var(--space-lg)' }}>📊 Büyüme Hızı Karşılaştırması (10 Sınıf)</h2>
 
-            <Card style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ height: '500px', minHeight: '400px' }}>
+            <Card style={{ padding: 'clamp(16px, 4vw, 24px)', display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 4vw, 20px)' }}>
+                <div style={{ height: 'clamp(400px, 100vw, 500px)', minHeight: '350px' }}>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart
                             data={data}
@@ -98,9 +98,9 @@ const Classes = () => {
                             <YAxis
                                 dataKey="name"
                                 type="category"
-                                width={110}
+                                width={window.innerWidth <= 768 ? 80 : 110}
                                 stroke="var(--text-primary)"
-                                tick={{ fontSize: 14, fontWeight: 700, fill: 'var(--text-primary)' }}
+                                tick={{ fontSize: window.innerWidth <= 768 ? 11 : 14, fontWeight: 700, fill: 'var(--text-primary)' }}
                                 interval={0}
                                 axisLine={false}
                                 tickLine={false}
@@ -138,13 +138,13 @@ const Classes = () => {
 
                 {/* Legend / Açıklama Alt Bilgisi - Geliştirilmiş Tasarım */}
                 <div style={{
-                    padding: '20px',
+                    padding: 'clamp(12px, 4vw, 20px)',
                     background: 'var(--bg-secondary)',
                     borderRadius: 'var(--radius-lg)',
                     border: '1px solid var(--border-light)',
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                    gap: '16px',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
+                    gap: 'clamp(12px, 3vw, 16px)',
                 }}>
                     {data.map((d) => (
                         <div key={d.name} style={{

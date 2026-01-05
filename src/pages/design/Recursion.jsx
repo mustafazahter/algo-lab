@@ -82,15 +82,15 @@ const Recursion = () => {
     };
 
     const renderTower = (towerId, diskArray) => (
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '200px', borderBottom: '4px solid var(--border-medium)', position: 'relative' }}>
+        <div style={{ flex: 1, minWidth: 'clamp(80px, 25vw, 120px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: 'clamp(180px, 40vw, 200px)', borderBottom: '4px solid var(--border-medium)', position: 'relative' }}>
             {/* Direk */}
-            <div style={{ position: 'absolute', bottom: 0, width: '6px', height: '180px', background: 'var(--border-light)', zIndex: 0, borderRadius: '4px 4px 0 0' }} />
+            <div style={{ position: 'absolute', bottom: 0, width: 'clamp(4px, 1.5vw, 6px)', height: 'clamp(160px, 35vw, 180px)', background: 'var(--border-light)', zIndex: 0, borderRadius: '4px 4px 0 0' }} />
 
             <div style={{ zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column-reverse', alignItems: 'center', marginBottom: '4px' }}>
                 {diskArray.map((diskSize, i) => (
                     <div key={i} className="animate-fade-in" style={{
-                        width: `${diskSize * 40 + 20}px`,
-                        height: '24px',
+                        width: `clamp(${diskSize * 25 + 15}px, ${diskSize * 10 + 5}vw, ${diskSize * 40 + 20}px)`,
+                        height: 'clamp(18px, 5vw, 24px)',
                         background: diskSize === 1 ? 'var(--primary)' : diskSize === 2 ? 'var(--accent)' : 'var(--success)',
                         borderRadius: '4px',
                         marginBottom: '2px',
@@ -100,20 +100,20 @@ const Recursion = () => {
                     }} />
                 ))}
             </div>
-            <div style={{ fontWeight: '600', marginTop: '10px', color: 'var(--text-secondary)' }}>Kule {towerId}</div>
+            <div style={{ fontWeight: '600', marginTop: '10px', color: 'var(--text-secondary)', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Kule {towerId}</div>
         </div>
     );
 
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.5 Özyineleme (Recursion)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Bir problemin çözümünü, kendisinin daha küçük versiyonlarına indirgeyerek parça parça çözme yöntemi.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>2.5 Özyineleme (Recursion)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Bir problemin çözümünü, kendisinin daha küçük versiyonlarına indirgeyerek parça parça çözme yöntemi.</p>
                 </div>
             </div>
 
@@ -139,40 +139,51 @@ const Recursion = () => {
 
                 {/* Sol: Hanoi Simülasyonu */}
                 <Card style={{ gridColumn: '1 / -1' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)' }}>
-                        <h2 style={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Layers size={24} color="var(--primary)" />
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
+                        <h2 className="text-subheading" style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                            <Layers size={window.innerWidth <= 768 ? 20 : 24} color="var(--primary)" />
                             Hanoi Kuleleri (n=3)
                         </h2>
-                        <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+                        <div style={{ display: 'flex', gap: 'clamp(6px, 2vw, 8px)', flexWrap: 'wrap' }}>
                             <button onClick={startSimulation} disabled={moves.length > 0}
-                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '8px 16px', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--primary)', color: 'var(--primary)' }}>
+                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: 'clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px)', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--primary)', color: 'var(--primary)', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}>
                                 <Play size={16} /> Başlat
                             </button>
                             <button onClick={nextStep} disabled={moves.length === 0 || currentMoveIndex >= moves.length - 1}
-                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '8px 16px', background: 'var(--primary)', color: 'white', borderRadius: 'var(--radius-md)' }}>
+                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: 'clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px)', background: 'var(--primary)', color: 'white', borderRadius: 'var(--radius-md)', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}>
                                 <SkipForward size={16} /> İleri
                             </button>
                             <button onClick={reset}
-                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '8px 16px', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', color: 'var(--text-secondary)' }}>
+                                style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: 'clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px)', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', color: 'var(--text-secondary)', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}>
                                 <RotateCcw size={16} /> Sıfırla
                             </button>
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: 'var(--space-xl)', padding: '0 var(--space-xl)', minHeight: '250px' }}>
+                    <div style={{ display: 'flex', gap: 'clamp(12px, 4vw, 40px)', padding: '0 clamp(8px, 3vw, 40px)', minHeight: '250px', overflowX: 'auto' }}>
                         {renderTower('A', disks.A)}
                         {renderTower('B', disks.B)}
                         {renderTower('C', disks.C)}
                     </div>
 
                     {/* İşlem Logu */}
-                    <div style={{ marginTop: 'var(--space-lg)', padding: 'var(--space-md)', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', textAlign: 'center', color: 'var(--text-primary)', minHeight: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ marginTop: 'var(--space-lg)', padding: 'clamp(12px, 3vw, 16px)', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', textAlign: 'center', color: 'var(--text-primary)', minHeight: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}>
                         {activeCall ? (
                             <span>
                                 <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>{activeCall.id}</span> çalışıyor...
                                 {moves[currentMoveIndex].type === 'MOVE' && <span style={{ marginLeft: '10px', color: 'var(--success)' }}>➜ {moves[currentMoveIndex].log}</span>}
                             </span>
+                        ) : moves.length === 0 ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: 'var(--space-sm)' }}>
+                                <div style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', fontWeight: 'bold', color: 'var(--primary)' }}>
+                                    🎯 Hanoi Kuleleri Simülasyonu
+                                </div>
+                                <div style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'var(--text-secondary)' }}>
+                                    Tüm diskleri A kulesinden C kulesine taşıyın.
+                                    <br />
+                                    Başlamak için "Başlat" butonuna tıklayın.
+                                </div>
+                            </div>
                         ) : "Hazır"}
                     </div>
                 </Card>

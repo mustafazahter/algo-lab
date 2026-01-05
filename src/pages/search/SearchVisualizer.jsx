@@ -219,13 +219,13 @@ const SearchVisualizer = () => {
     return (
         <div className="animate-fade-in" onMouseUp={handleMouseUp}>
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>5.3. Arama Algoritmaları Simülatörü</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Harita üzerinde engeller oluşturun ve hazineye giden en kısa yolu bulun.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>5.3. Arama Algoritmaları Simülatörü</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Harita üzerinde engeller oluşturun ve hazineye giden en kısa yolu bulun.</p>
                 </div>
             </div>
             {/* Kontrol ve İstatistik */}
@@ -233,19 +233,21 @@ const SearchVisualizer = () => {
                 <Card>
                     <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}>
 
-                        <div style={{ display: 'flex', gap: '10px' }}>
+                        <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 10px)', flexWrap: 'wrap', width: '100%' }}>
                             <select
                                 value={algorithm}
                                 onChange={(e) => setAlgorithm(e.target.value)}
                                 disabled={isRunning}
                                 style={{
-                                    padding: '12px',
+                                    padding: 'clamp(10px, 2.5vw, 12px)',
                                     borderRadius: '8px',
                                     background: 'var(--bg-primary)',
                                     color: 'var(--text-primary)',
                                     border: '1px solid var(--border-medium)',
                                     fontWeight: 'bold',
-                                    minWidth: '200px'
+                                    minWidth: 'clamp(180px, 45vw, 200px)',
+                                    fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
+                                    flex: '1 1 auto'
                                 }}
                             >
                                 <option value="bfs">BFS - Genişlik Öncelikli</option>
@@ -260,49 +262,52 @@ const SearchVisualizer = () => {
                                 disabled={isRunning}
                                 className="hover-scale"
                                 style={{
-                                    padding: '12px 24px',
+                                    padding: 'clamp(10px, 2.5vw, 12px) clamp(18px, 4vw, 24px)',
                                     background: isRunning ? 'var(--text-muted)' : 'var(--success)',
                                     color: 'white',
                                     borderRadius: '8px',
                                     border: 'none',
                                     fontWeight: 'bold',
+                                    fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '8px',
                                     cursor: isRunning ? 'not-allowed' : 'pointer',
-                                    boxShadow: isRunning ? 'none' : '0 4px 12px rgba(16, 185, 129, 0.3)'
+                                    boxShadow: isRunning ? 'none' : '0 4px 12px rgba(16, 185, 129, 0.3)',
+                                    flex: '0 1 auto'
                                 }}
                             >
-                                <Play size={20} /> BAŞLAT
+                                <Play size={window.innerWidth <= 768 ? 16 : 20} /> BAŞLAT
                             </button>
 
                             <button
                                 onClick={() => { clearTimeouts(); initializeGrid(); setIsRunning(false); }}
                                 className="hover-scale"
                                 style={{
-                                    padding: '12px',
+                                    padding: 'clamp(10px, 2.5vw, 12px)',
                                     background: 'var(--bg-secondary)',
                                     color: 'var(--text-secondary)',
                                     borderRadius: '8px',
                                     border: '1px solid var(--border-light)',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
+                                    flex: '0 0 auto'
                                 }}
                             >
-                                <RotateCcw size={20} />
+                                <RotateCcw size={window.innerWidth <= 768 ? 16 : 20} />
                             </button>
                         </div>
 
-                        <div style={{ display: 'flex', gap: '20px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                            <div style={{ textAlign: 'center' }}>
-                                <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '1.2rem' }}>{stats.visited}</div>
+                        <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 20px)', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'var(--text-secondary)', flexWrap: 'wrap', justifyContent: 'center' }}>
+                            <div style={{ textAlign: 'center', minWidth: 'clamp(60px, 20vw, 80px)' }}>
+                                <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: 'clamp(1rem, 3vw, 1.2rem)' }}>{stats.visited}</div>
                                 <div>Ziyaret</div>
                             </div>
-                            <div style={{ textAlign: 'center' }}>
-                                <div style={{ fontWeight: 'bold', color: 'var(--success)', fontSize: '1.2rem' }}>{stats.pathLength}</div>
+                            <div style={{ textAlign: 'center', minWidth: 'clamp(60px, 20vw, 80px)' }}>
+                                <div style={{ fontWeight: 'bold', color: 'var(--success)', fontSize: 'clamp(1rem, 3vw, 1.2rem)' }}>{stats.pathLength}</div>
                                 <div>Yol Birimi</div>
                             </div>
-                            <div style={{ textAlign: 'center' }}>
-                                <div style={{ fontWeight: 'bold', color: stats.status.includes('❌') ? 'var(--danger)' : 'var(--accent)', fontSize: '1.2rem' }}>{stats.status}</div>
+                            <div style={{ textAlign: 'center', minWidth: 'clamp(60px, 20vw, 80px)' }}>
+                                <div style={{ fontWeight: 'bold', color: stats.status.includes('❌') ? 'var(--danger)' : 'var(--accent)', fontSize: 'clamp(1rem, 3vw, 1.2rem)' }}>{stats.status}</div>
                                 <div>Durum</div>
                             </div>
                         </div>
@@ -311,17 +316,17 @@ const SearchVisualizer = () => {
 
                     {/* Mesaj */}
                     <div style={{
-                        marginTop: '20px',
-                        padding: '12px 15px',
+                        marginTop: 'clamp(15px, 4vw, 20px)',
+                        padding: 'clamp(10px, 3vw, 12px) clamp(12px, 3vw, 15px)',
                         background: 'var(--bg-secondary)',
                         borderLeft: '4px solid var(--primary)',
                         borderRadius: '0 4px 4px 0',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '12px',
-                        fontSize: '0.95rem'
+                        gap: 'clamp(8px, 2vw, 12px)',
+                        fontSize: 'clamp(0.85rem, 2vw, 0.95rem)'
                     }}>
-                        <Info size={20} color="var(--primary)" />
+                        <Info size={window.innerWidth <= 768 ? 16 : 20} color="var(--primary)" style={{ flexShrink: 0 }} />
                         <span>{message}</span>
                     </div>
                 </Card>
@@ -332,18 +337,19 @@ const SearchVisualizer = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 background: 'var(--bg-card)',
-                padding: '20px',
+                padding: 'clamp(12px, 3vw, 20px)',
                 borderRadius: '12px',
                 border: '1px solid var(--border-light)',
-                overflowX: 'auto'
+                overflowX: 'auto',
+                WebkitOverflowScrolling: 'touch'
             }}>
                 <div
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: `repeat(${COLS}, 30px)`,
+                        gridTemplateColumns: `repeat(${COLS}, clamp(20px, 5vw, 30px))`,
                         gap: '1px',
                         backgroundColor: 'var(--border-light)', // Grid lines color
-                        border: '5px solid var(--border-medium)',
+                        border: 'clamp(3px, 1vw, 5px) solid var(--border-medium)',
                         borderRadius: '4px'
                     }}
                 >
@@ -354,8 +360,8 @@ const SearchVisualizer = () => {
                                 onMouseDown={() => handleMouseDown(rowIdx, nodeIdx)}
                                 onMouseEnter={() => handleMouseEnter(rowIdx, nodeIdx)}
                                 style={{
-                                    width: '30px',
-                                    height: '30px',
+                                    width: 'clamp(20px, 5vw, 30px)',
+                                    height: 'clamp(20px, 5vw, 30px)',
                                     backgroundColor: getNodeColor(node),
                                     transition: (node.type === 'visited' || node.type === 'path') ? 'all 0.3s ease-out' : 'background-color 0.1s',
                                     animation: node.type === 'visited' ? 'pop 0.3s ease-out' : node.type === 'path' ? 'pulse 1s infinite' : 'none',
@@ -367,7 +373,7 @@ const SearchVisualizer = () => {
                 </div>
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: '10px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <div style={{ textAlign: 'center', marginTop: 'clamp(8px, 2vw, 10px)', color: 'var(--text-muted)', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)' }}>
                 <MousePointer2 size={14} style={{ display: 'inline', marginRight: '5px', verticalAlign: 'middle' }} />
                 Haritaya tıklayarak duvarlar ekleyebilirsin
             </div>

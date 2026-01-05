@@ -21,13 +21,13 @@ const Asymptotic = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>3.1 Asimptotik Notasyonlar</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Algoritmaların performansını sadece girdi boyutu (n) büyüdükçe nasıl davrandığına göre ölçme sanatıdır.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>3.1 Asimptotik Notasyonlar</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Algoritmaların performansını sadece girdi boyutu (n) büyüdükçe nasıl davrandığına göre ölçme sanatıdır.</p>
                 </div>
             </div>
 
@@ -97,11 +97,11 @@ const Asymptotic = () => {
                 </Card>
             </div>
 
-            <h2 style={{ fontSize: '1.8rem', marginBottom: 'var(--space-lg)' }}>📉 Görsel Kanıt: Sınırlar Arasında</h2>
+            <h2 className="text-subheading" style={{ marginBottom: 'var(--space-lg)' }}>📉 Görsel Kanıt: Sınırlar Arasında</h2>
 
-            <Card style={{ height: '450px', padding: 'var(--space-md)' }}>
+            <Card style={{ height: 'clamp(400px, 90vw, 500px)', padding: 'clamp(12px, 3vw, 16px)' }}>
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={graphPoints} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                    <LineChart data={graphPoints} margin={{ top: 20, right: 30, left: 20, bottom: window.innerWidth <= 768 ? 80 : 50 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="var(--border-light)" />
                         <XAxis
                             dataKey="n"
@@ -115,7 +115,12 @@ const Asymptotic = () => {
                         <Tooltip
                             contentStyle={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--text-primary)' }}
                         />
-                        <Legend verticalAlign="top" height={36} />
+                        <Legend
+                            verticalAlign="bottom"
+                            height={window.innerWidth <= 768 ? 80 : 50}
+                            wrapperStyle={{ fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', paddingTop: '10px' }}
+                            iconSize={window.innerWidth <= 768 ? 10 : 14}
+                        />
 
                         {/* Upper Bound */}
                         <Line type="monotone" dataKey="upper" stroke="var(--danger)" name="Üst Sınır (Big O)" strokeDasharray="5 5" dot={false} strokeWidth={2} />
@@ -127,10 +132,12 @@ const Asymptotic = () => {
                         <Line type="monotone" dataKey="lower" stroke="var(--success)" name="Alt Sınır (Omega)" strokeDasharray="5 5" dot={false} strokeWidth={2} />
                     </LineChart>
                 </ResponsiveContainer>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '10px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                    <Info size={16} /> Grafikte görüldüğü gibi, algoritmanın gerçek performansı (Mavi), her zaman Kırmızı (Kötü) ve Yeşil (İyi) çizgilerin arasında kalır.
-                </div>
             </Card>
+
+            {/* Açıklama metni Card dışında */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: 'var(--space-md)', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'var(--text-muted)', padding: '0 var(--space-sm)', textAlign: 'center' }}>
+                <Info size={16} /> Grafikte görüldüğü gibi, algoritmanın gerçek performansı (Mavi), her zaman Kırmızı (Kötü) ve Yeşil (İyi) çizgilerin arasında kalır.
+            </div>
         </div>
     );
 };

@@ -91,13 +91,13 @@ const DivideConquer = () => {
     return (
         <div className="animate-fade-in" style={{ paddingBottom: '40px' }}>
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.2 Böl ve Yönet (Divide & Conquer)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Karmaşık problemleri küçük parçalara indirgeyerek fethet.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>2.2 Böl ve Yönet (Divide & Conquer)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Karmaşık problemleri küçük parçalara indirgeyerek fethet.</p>
                 </div>
             </div>
 
@@ -181,16 +181,16 @@ const DivideConquer = () => {
                 </Card>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px' }}>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
-                    <GitMerge size={24} style={{ color: 'var(--primary)' }} /> Simülasyon Akışı
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
+                <h2 className="text-subheading" style={{ fontWeight: '700', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                    <GitMerge size={window.innerWidth <= 768 ? 20 : 24} style={{ color: 'var(--primary)' }} /> Simülasyon Akışı
                 </h2>
-                <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 12px)', flexWrap: 'wrap' }}>
                     <Button
                         onClick={nextStep}
                         disabled={isSorted}
                         icon={<PlayCircle size={18} />}
-                        style={{ padding: '10px 24px' }}
+                        style={{ padding: 'clamp(8px, 2vw, 10px) clamp(16px, 4vw, 24px)', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
                     >
                         {isSorted ? 'Tamamlandı' : 'Adım İlerle'}
                     </Button>
@@ -198,14 +198,14 @@ const DivideConquer = () => {
                         onClick={reset}
                         variant="secondary"
                         icon={<RotateCcw size={18} />}
-                        style={{ padding: '10px 20px' }}
+                        style={{ padding: 'clamp(8px, 2vw, 10px) clamp(14px, 3vw, 20px)', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
                     >
                         Sıfırla
                     </Button>
                 </div>
             </div>
 
-            <Card style={{ padding: '40px', background: 'var(--bg-secondary)', overflow: 'hidden', position: 'relative' }}>
+            <Card style={{ padding: 'clamp(20px, 5vw, 40px)', background: 'var(--bg-secondary)', overflow: 'hidden', position: 'relative' }}>
                 <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -233,7 +233,7 @@ const DivideConquer = () => {
                     gap: '50px'
                 }}>
                     {/* Ana Dizi Görünümü */}
-                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', gap: 'clamp(6px, 2vw, 12px)', flexWrap: 'wrap', justifyContent: 'center' }}>
                         {(currentStep ? currentStep.fullArray : initialArray).map((num, i) => {
                             const isActive = currentStep && i >= currentStep.activeRange[0] && i < currentStep.activeRange[1];
 
@@ -252,14 +252,14 @@ const DivideConquer = () => {
                                     }}
                                     transition={{ duration: 0.3 }}
                                     style={{
-                                        width: '60px',
-                                        height: '60px',
+                                        width: 'clamp(50px, 12vw, 60px)',
+                                        height: 'clamp(50px, 12vw, 60px)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        fontSize: '1.2rem',
+                                        fontSize: 'clamp(1rem, 3vw, 1.2rem)',
                                         fontWeight: '800',
-                                        borderRadius: '14px',
+                                        borderRadius: 'clamp(10px, 3vw, 14px)',
                                         border: '2px solid'
                                     }}
                                 >
@@ -280,20 +280,22 @@ const DivideConquer = () => {
                                     exit={{ opacity: 0, scale: 0.98 }}
                                     transition={{ duration: 0.2 }}
                                     style={{
-                                        padding: '20px 30px',
-                                        borderRadius: '16px',
+                                        padding: 'clamp(15px, 4vw, 20px) clamp(20px, 5vw, 30px)',
+                                        borderRadius: 'clamp(12px, 3vw, 16px)',
                                         background: 'rgba(255,255,255,0.03)',
                                         border: '1px dashed var(--border-medium)',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center',
-                                        gap: '15px'
+                                        gap: 'clamp(10px, 3vw, 15px)',
+                                        maxWidth: '100%',
+                                        overflowX: 'auto'
                                     }}
                                 >
                                     <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--text-secondary)', fontWeight: 'bold' }}>
                                         {currentStep.type === 'split' ? 'Dinamik Ayrıştırma' : 'Hiyerarşik Birleştirme'}
                                     </div>
-                                    <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', gap: 'clamp(15px, 5vw, 30px)', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                                         {currentStep.type === 'split' ? (
                                             <>
                                                 <div style={{ padding: '10px 15px', background: 'var(--bg-card)', borderRadius: '8px', border: '1px solid var(--border-light)' }}>

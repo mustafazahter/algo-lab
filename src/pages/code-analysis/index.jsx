@@ -248,7 +248,7 @@ const LoopAnalysis = () => {
                 </button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 'var(--space-lg)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: 'var(--space-lg)' }}>
                 {/* Sol: Kod Görünümü */}
                 <Card style={{ fontFamily: 'monospace', background: 'var(--bg-card)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', paddingBottom: '10px', borderBottom: '1px solid var(--border-light)' }}>
@@ -277,7 +277,13 @@ const LoopAnalysis = () => {
                             </select>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '2px',
+                        overflowX: 'auto',
+                        maxWidth: '100%'
+                    }}>
                         {codes[algo].map((line, idx) => (
                             <div key={idx} style={{
                                 padding: '6px 10px',
@@ -286,8 +292,9 @@ const LoopAnalysis = () => {
                                 color: activeLine === idx ? 'var(--text-primary)' : line.trim().startsWith('//') ? 'var(--text-muted)' : 'var(--text-secondary)',
                                 transition: 'all 0.2s',
                                 borderRadius: '0 4px 4px 0',
-                                whiteSpace: 'pre-wrap',
-                                fontSize: '0.95rem'
+                                whiteSpace: 'pre',
+                                fontSize: 'clamp(0.8rem, 2.5vw, 0.95rem)',
+                                minWidth: 'fit-content'
                             }}>
                                 {line}
                             </div>
@@ -335,7 +342,7 @@ const LoopAnalysis = () => {
                         </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(120px, 1fr) 1fr', gap: 'var(--space-md)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : 'minmax(120px, 1fr) 1fr', gap: 'var(--space-md)' }}>
                         {/* Teorik Hesaplama Kartı */}
                         <div style={{ gridColumn: 'span 2', background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '10px', border: '1px solid var(--border-medium)' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -354,18 +361,18 @@ const LoopAnalysis = () => {
                         </div>
 
                         {/* Değişkenler */}
-                        <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center', gridColumn: window.innerWidth <= 768 ? 'span 1' : 'auto' }}>
                             <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '5px' }}>Değişken i</div>
                             <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{variables.i}</div>
                         </div>
 
                         {(algo === 'quadratic' || algo === 'dependent') ? (
-                            <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                            <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center', gridColumn: window.innerWidth <= 768 ? 'span 1' : 'auto' }}>
                                 <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '5px' }}>Değişken j</div>
                                 <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{variables.j}</div>
                             </div>
                         ) : (
-                            <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center', opacity: 0.3 }}>
+                            <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', textAlign: 'center', opacity: 0.3, gridColumn: window.innerWidth <= 768 ? 'span 1' : 'auto' }}>
                                 <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '5px' }}>Değişken j</div>
                                 <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>-</div>
                             </div>

@@ -5,34 +5,34 @@ import SimpleGraph from '../../components/ui/SimpleGraph';
 
 const GraphTheory = () => {
     return (
-        <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+        <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', width: '100%', maxWidth: '100%' }}>
 
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap', width: '100%' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
+                    <CornerDownRight size={typeof window !== 'undefined' && window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>7.1 Graf Temelleri ve Tanımlar</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Şehirler ve Yollar: Karmaşık problemlerin en basit modeli.</p>
+                <div style={{ flex: 1, minWidth: '0' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>7.1 Graf Temelleri ve Tanımlar</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Şehirler ve Yollar: Karmaşık problemlerin en basit modeli.</p>
                 </div>
             </div>
 
             {/* ANA AÇIKLAMA */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '8px', color: 'var(--primary)' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '8px', color: 'var(--primary)', flexShrink: 0 }}>
                         <Map size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>7.1. Graf Nedir? </h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>7.1. Graf Nedir? </h2>
                 </div>
 
                 <Card>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1fr', gap: '30px', alignItems: 'start' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 'clamp(20px, 4vw, 30px)', alignItems: 'start', width: '100%' }}>
                         {/* Sol: Açıklama */}
-                        <div>
+                        <div style={{ width: '100%' }}>
                             <h3 style={{ marginTop: 0, color: 'var(--primary)' }}>🗺️ Harita Analojisi</h3>
-                            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1rem' }}>
+                            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>
                                 Bir Türkiye haritası hayal et. Bu haritada:
                             </p>
                             <ul style={{ color: 'var(--text-secondary)', lineHeight: '2', paddingLeft: '20px' }}>
@@ -55,14 +55,14 @@ const GraphTheory = () => {
                                 <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary)' }}>
                                     💡 Özet: Graf = Noktalar + Çizgiler
                                 </p>
-                                <p style={{ margin: '10px 0 0 0', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>
-                                    G = (V, E) &nbsp;&nbsp;|&nbsp;&nbsp; V = Vertices, E = Edges
+                                <p style={{ margin: '10px 0 0 0', fontFamily: 'monospace', color: 'var(--text-secondary)', fontSize: 'clamp(0.85rem, 2vw, 1rem)', wordBreak: 'break-all' }}>
+                                    G = (V, E) &nbsp;|&nbsp; V = Vertices, E = Edges
                                 </p>
                             </div>
                         </div>
 
                         {/* Sağ: Görsel */}
-                        <div>
+                        <div style={{ width: '100%', overflow: 'hidden' }}>
                             <SimpleGraph
                                 height={220}
                                 title="📍 Örnek Graf: Basit Harita"
@@ -80,7 +80,7 @@ const GraphTheory = () => {
                                     { from: 'izm', to: 'ant', label: '300' }
                                 ]}
                             />
-                            <div style={{ marginTop: '5px', fontSize: '0.8rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                            <div style={{ marginTop: '5px', fontSize: 'clamp(0.75rem, 2vw, 0.8rem)', color: 'var(--text-secondary)', textAlign: 'center' }}>
                                 <span style={{ color: 'var(--primary)' }}>●</span> Düğümler: 4 şehir &nbsp;|&nbsp;
                                 <span style={{ color: 'var(--text-secondary)' }}>─</span> Kenarlar: 5 yol
                             </div>
@@ -90,108 +90,114 @@ const GraphTheory = () => {
             </section>
 
             {/* GERÇEK HAYAT ÖRNEKLERİ */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px', color: 'var(--success)' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <div style={{ padding: '10px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px', color: 'var(--success)', flexShrink: 0 }}>
                         <Globe size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>7.2. Nerede Kullanılır?</h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>7.2. Nerede Kullanılır?</h2>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                    <Card>
+                <div className="grid-responsive" style={{ width: '100%' }}>
+                    <Card style={{ width: '100%' }}>
                         <h4 style={{ marginTop: 0, color: 'var(--success)' }}>🌐 Sosyal Ağlar</h4>
                         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                             "Arkadaş önerileri" graf üzerinde yol aramadır.
                         </p>
-                        <SimpleGraph
-                            height={150}
-                            nodes={[
-                                { id: 'sen', x: 150, y: 30, label: 'Sen', bg: 'var(--success)', color: 'white' },
-                                { id: 'ali', x: 80, y: 80, label: 'Ali' },
-                                { id: 'veli', x: 220, y: 80, label: 'Veli' },
-                                { id: 'bur', x: 150, y: 130, label: 'Burak', bg: 'var(--bg-secondary)', borderColor: 'var(--text-secondary)' }
-                            ]}
-                            edges={[
-                                { from: 'sen', to: 'ali' },
-                                { from: 'sen', to: 'veli' },
-                                { from: 'ali', to: 'bur' },
-                                { from: 'veli', to: 'bur' }
-                            ]}
-                        />
-                        <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Burak senin ortak arkadaşın!</p>
+                        <div style={{ width: '100%', overflow: 'hidden' }}>
+                            <SimpleGraph
+                                height={150}
+                                nodes={[
+                                    { id: 'sen', x: 150, y: 30, label: 'Sen', bg: 'var(--success)', color: 'white' },
+                                    { id: 'ali', x: 80, y: 80, label: 'Ali' },
+                                    { id: 'veli', x: 220, y: 80, label: 'Veli' },
+                                    { id: 'bur', x: 150, y: 130, label: 'Burak', bg: 'var(--bg-secondary)', borderColor: 'var(--text-secondary)' }
+                                ]}
+                                edges={[
+                                    { from: 'sen', to: 'ali' },
+                                    { from: 'sen', to: 'veli' },
+                                    { from: 'ali', to: 'bur' },
+                                    { from: 'veli', to: 'bur' }
+                                ]}
+                            />
+                        </div>
+                        <p style={{ textAlign: 'center', fontSize: 'clamp(0.75rem, 2vw, 0.8rem)', color: 'var(--text-secondary)' }}>Burak senin ortak arkadaşın!</p>
                     </Card>
 
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h4 style={{ marginTop: 0, color: 'var(--warning)' }}>📍 Navigasyon</h4>
                         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                             En kısa yol (Dijkstra) buradan hesaplanır.
                         </p>
-                        <SimpleGraph
-                            height={150}
-                            nodes={[
-                                { id: 'ev', x: 50, y: 50, label: 'Ev' },
-                                { id: 'okul', x: 250, y: 50, label: 'Okul', bg: 'var(--warning)', color: 'white' },
-                                { id: 'market', x: 150, y: 120, label: 'Market' }
-                            ]}
-                            edges={[
-                                { from: 'ev', to: 'okul', label: '5dk' },
-                                { from: 'ev', to: 'market', label: '10dk' },
-                                { from: 'market', to: 'okul', label: '3dk' }
-                            ]}
-                        />
+                        <div style={{ width: '100%', overflow: 'hidden' }}>
+                            <SimpleGraph
+                                height={150}
+                                nodes={[
+                                    { id: 'ev', x: 50, y: 50, label: 'Ev' },
+                                    { id: 'okul', x: 250, y: 50, label: 'Okul', bg: 'var(--warning)', color: 'white' },
+                                    { id: 'market', x: 150, y: 120, label: 'Market' }
+                                ]}
+                                edges={[
+                                    { from: 'ev', to: 'okul', label: '5dk' },
+                                    { from: 'ev', to: 'market', label: '10dk' },
+                                    { from: 'market', to: 'okul', label: '3dk' }
+                                ]}
+                            />
+                        </div>
                     </Card>
 
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h4 style={{ marginTop: 0, color: 'var(--accent)' }}>💡 Elektrik Ağı</h4>
                         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                             Minimum kablo ile her eve elektrik (MST).
                         </p>
-                        <SimpleGraph
-                            height={150}
-                            nodes={[
-                                { id: 's', x: 150, y: 30, label: 'Santral', bg: 'var(--accent)', color: 'white' },
-                                { id: 'e1', x: 80, y: 100, label: 'Ev1' },
-                                { id: 'e2', x: 220, y: 100, label: 'Ev2' },
-                                { id: 'e3', x: 150, y: 140, label: 'Ev3' }
-                            ]}
-                            edges={[
-                                { from: 's', to: 'e1' },
-                                { from: 's', to: 'e2' },
-                                { from: 'e1', to: 'e3' },
-                                { from: 'e2', to: 'e3', dashed: true, color: 'var(--text-secondary)' }
-                            ]}
-                        />
-                        <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Kesikli çizgi gereksiz hat.</p>
+                        <div style={{ width: '100%', overflow: 'hidden' }}>
+                            <SimpleGraph
+                                height={150}
+                                nodes={[
+                                    { id: 's', x: 150, y: 30, label: 'Santral', bg: 'var(--accent)', color: 'white' },
+                                    { id: 'e1', x: 80, y: 100, label: 'Ev1' },
+                                    { id: 'e2', x: 220, y: 100, label: 'Ev2' },
+                                    { id: 'e3', x: 150, y: 140, label: 'Ev3' }
+                                ]}
+                                edges={[
+                                    { from: 's', to: 'e1' },
+                                    { from: 's', to: 'e2' },
+                                    { from: 'e1', to: 'e3' },
+                                    { from: 'e2', to: 'e3', dashed: true, color: 'var(--text-secondary)' }
+                                ]}
+                            />
+                        </div>
+                        <p style={{ textAlign: 'center', fontSize: 'clamp(0.75rem, 2vw, 0.8rem)', color: 'var(--text-secondary)' }}>Kesikli çizgi gereksiz hat.</p>
                     </Card>
                 </div>
             </section>
 
             {/* GRAF TÜRLERİ */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(236, 72, 153, 0.1)', borderRadius: '8px', color: 'var(--accent)' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <div style={{ padding: '10px', background: 'rgba(236, 72, 153, 0.1)', borderRadius: '8px', color: 'var(--accent)', flexShrink: 0 }}>
                         <ArrowRightLeft size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>7.3. Graf Türleri</h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>7.3. Graf Türleri</h2>
                     <Badge>Sınav İçin Kritik</Badge>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                <div className="grid-responsive" style={{ width: '100%' }}>
 
                     {/* YÖNLÜ vs YÖNSÜZ */}
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h4 style={{ marginTop: 0, color: 'var(--text-primary)', borderBottom: '2px solid var(--border-light)', paddingBottom: '10px' }}>
                             1️⃣ Yön Durumu
                         </h4>
 
-                        <div style={{ display: 'grid', gap: '15px', marginTop: '15px' }}>
-                            <div style={{ background: 'rgba(239, 68, 68, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '15px', marginTop: '15px', width: '100%' }}>
+                            <div style={{ background: 'rgba(239, 68, 68, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.2)', width: '100%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap' }}>
                                     <strong style={{ color: 'var(--danger)' }}>Yönlü (Directed)</strong>
                                     <Badge type="danger">Tek Yön</Badge>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden', width: '100%' }}>
                                     <SimpleGraph
                                         height={80}
                                         nodes={[
@@ -206,12 +212,12 @@ const GraphTheory = () => {
                                 </p>
                             </div>
 
-                            <div style={{ background: 'rgba(16, 185, 129, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                            <div style={{ background: 'rgba(16, 185, 129, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.2)', width: '100%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap' }}>
                                     <strong style={{ color: 'var(--success)' }}>Yönsüz (Undirected)</strong>
                                     <Badge type="success">Çift Yön</Badge>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden', width: '100%' }}>
                                     <SimpleGraph
                                         height={80}
                                         nodes={[
@@ -229,18 +235,18 @@ const GraphTheory = () => {
                     </Card>
 
                     {/* AĞIRLIKLI vs AĞIRLIKSIZ */}
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h4 style={{ marginTop: 0, color: 'var(--text-primary)', borderBottom: '2px solid var(--border-light)', paddingBottom: '10px' }}>
                             2️⃣ Ağırlık Durumu
                         </h4>
 
-                        <div style={{ display: 'grid', gap: '15px', marginTop: '15px' }}>
-                            <div style={{ background: 'rgba(99, 102, 241, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.2)' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '15px', marginTop: '15px', width: '100%' }}>
+                            <div style={{ background: 'rgba(99, 102, 241, 0.05)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.2)', width: '100%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap' }}>
                                     <strong style={{ color: 'var(--primary)' }}>Ağırlıklı (Weighted)</strong>
                                     <Badge type="primary">Maliyetli</Badge>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden', width: '100%' }}>
                                     <SimpleGraph
                                         height={80}
                                         nodes={[
@@ -255,12 +261,12 @@ const GraphTheory = () => {
                                 </p>
                             </div>
 
-                            <div style={{ background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-medium)' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                            <div style={{ background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-medium)', width: '100%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap' }}>
                                     <strong style={{ color: 'var(--text-primary)' }}>Ağırlıksız (Unweighted)</strong>
                                     <Badge>Basit</Badge>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden', width: '100%' }}>
                                     <SimpleGraph
                                         height={80}
                                         nodes={[
@@ -278,11 +284,11 @@ const GraphTheory = () => {
                     </Card>
 
                     {/* DÖNGÜSEL vs DÖNGÜSÜZ */}
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h4 style={{ marginTop: 0, color: 'var(--text-primary)', borderBottom: '2px solid var(--border-light)', paddingBottom: '10px' }}>
                             3️⃣ Döngü Durumu
                         </h4>
-                        <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', overflow: 'hidden', width: '100%' }}>
                             <SimpleGraph
                                 height={150}
                                 nodes={[
@@ -302,8 +308,8 @@ const GraphTheory = () => {
                         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
                             <strong>Döngüsel (Cyclic):</strong> Başladığın yere dönebilirsin (A &rarr; B &rarr; C &rarr; D &rarr; A).
                         </p>
-                        <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-light)', marginTop: '15px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
+                        <div style={{ background: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-light)', marginTop: '15px', width: '100%' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', padding: '10px', overflow: 'hidden', width: '100%' }}>
                                 <SimpleGraph
                                     height={120}
                                     nodes={[
@@ -331,55 +337,60 @@ const GraphTheory = () => {
 
 
             {/* TEMEL TERİMLER */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '8px', color: 'var(--warning)' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <div style={{ padding: '10px', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '8px', color: 'var(--warning)', flexShrink: 0 }}>
                         <Zap size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>7.4. Temel Terimler Sözlüğü</h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>7.4. Temel Terimler Sözlüğü</h2>
                 </div>
 
                 <Card>
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
+                    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', width: '100%', maxWidth: '100%' }}>
+                        <table style={{
+                            width: '100%',
+                            borderCollapse: 'collapse',
+                            fontSize: 'clamp(0.75rem, 2vw, 0.95rem)',
+                            minWidth: '500px'
+                        }}>
                             <thead>
                                 <tr style={{ borderBottom: '2px solid var(--border-medium)', textAlign: 'left' }}>
-                                    <th style={{ padding: '12px', color: 'var(--text-primary)' }}>Terim</th>
-                                    <th style={{ padding: '12px', color: 'var(--text-primary)' }}>İngilizce</th>
-                                    <th style={{ padding: '12px', color: 'var(--text-primary)' }}>Açıklama</th>
-                                    <th style={{ padding: '12px', color: 'var(--text-primary)' }}>Örnek</th>
+                                    <th style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>Terim</th>
+                                    <th style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>İngilizce</th>
+                                    <th style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-primary)', minWidth: '150px' }}>Açıklama</th>
+                                    <th style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-primary)', minWidth: '120px' }}>Örnek</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold', color: 'var(--primary)' }}>Düğüm</td>
-                                    <td style={{ padding: '12px', fontFamily: 'monospace' }}>Vertex / Node</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Noktalar, şehirler, kişiler</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>İstanbul, Ankara</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontWeight: 'bold', color: 'var(--primary)', whiteSpace: 'nowrap' }}>Düğüm</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>Vertex / Node</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>Noktalar, şehirler, kişiler</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>İstanbul, Ankara</td>
                                 </tr>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold', color: 'var(--accent)' }}>Kenar</td>
-                                    <td style={{ padding: '12px', fontFamily: 'monospace' }}>Edge</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Çizgiler, yollar, ilişkiler</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>İstanbul-Ankara yolu</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontWeight: 'bold', color: 'var(--accent)', whiteSpace: 'nowrap' }}>Kenar</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>Edge</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>Çizgiler, yollar, ilişkiler</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>İstanbul-Ankara yolu</td>
                                 </tr>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold', color: 'var(--warning)' }}>Ağırlık</td>
-                                    <td style={{ padding: '12px', fontFamily: 'monospace' }}>Weight</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Kenarın maliyeti</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>450 km, 5 saat</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontWeight: 'bold', color: 'var(--warning)', whiteSpace: 'nowrap' }}>Ağırlık</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>Weight</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>Kenarın maliyeti</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>450 km, 5 saat</td>
                                 </tr>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold', color: 'var(--success)' }}>Derece</td>
-                                    <td style={{ padding: '12px', fontFamily: 'monospace' }}>Degree</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Bir düğüme bağlı kenar sayısı</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Ankara'nın 5 yolu var → Derece=5</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontWeight: 'bold', color: 'var(--success)', whiteSpace: 'nowrap' }}>Derece</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>Degree</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>Bir düğüme bağlı kenar sayısı</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>Ankara'nın 5 yolu var → Derece=5</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ padding: '12px', fontWeight: 'bold', color: 'var(--danger)' }}>Yol</td>
-                                    <td style={{ padding: '12px', fontFamily: 'monospace' }}>Path</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Düğümler arası kenar dizisi</td>
-                                    <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>İst &rarr; Ank &rarr; İzm</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontWeight: 'bold', color: 'var(--danger)', whiteSpace: 'nowrap' }}>Yol</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>Path</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>Düğümler arası kenar dizisi</td>
+                                    <td style={{ padding: 'clamp(8px, 2vw, 12px)', color: 'var(--text-secondary)' }}>İst &rarr; Ank &rarr; İzm</td>
                                 </tr>
                             </tbody>
                         </table>

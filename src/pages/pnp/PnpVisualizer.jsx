@@ -3,6 +3,8 @@ import { Card, Button } from '../../components/ui/Common';
 import { Play, RotateCcw, Zap, MousePointer2 } from 'lucide-react';
 
 const PnpVisualizer = () => {
+    // Cities are stored as normalized coordinates (0.0 to 1.0)
+    // This ensures they stay relatively positioned regardless of screen resize
     const [cities, setCities] = useState([]);
     const [bestPath, setBestPath] = useState([]);
     const [currentPath, setCurrentPath] = useState([]);
@@ -13,19 +15,49 @@ const PnpVisualizer = () => {
     const [progress, setProgress] = useState(0); // 0 to 100
     const [stats, setStats] = useState({ time: 0, checked: 0 });
 
+    const canvasContainerRef = useRef(null);
     const canvasRef = useRef(null);
-    const width = 800;
-    const height = 500;
+    const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
 
-    // Canvas Click: Add City
+    // Resize Observer to handle dynamic screen sizes perfectly
+    useEffect(() => {
+        if (!canvasContainerRef.current) return;
+
+        const updateSize = () => {
+            if (canvasContainerRef.current) {
+                const { clientWidth, clientHeight } = canvasContainerRef.current;
+                setDimensions({ width: clientWidth, height: clientHeight });
+            }
+        };
+
+        // Initial size
+        updateSize();
+
+        const observer = new ResizeObserver(() => {
+            updateSize();
+        });
+
+        observer.observe(canvasContainerRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+
+    // Add City (Normalized Coordinates 0-1)
     const handleCanvasClick = (e) => {
         if (isComputing) return;
-        const rect = canvasRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
 
-        const newCity = { x, y, id: cities.length };
+        // Get exact click position relative to the container
+        const rect = canvasContainerRef.current.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const offsetY = e.clientY - rect.top;
+
+        // Normalize (0.0 - 1.0)
+        const nx = offsetX / rect.width;
+        const ny = offsetY / rect.height;
+
+        const newCity = { x: nx, y: ny, id: cities.length };
         setCities([...cities, newCity]);
+
         // Reset state
         setBestPath([]);
         setCurrentPath([]);
@@ -43,8 +75,15 @@ const PnpVisualizer = () => {
         setIsComputing(false);
     };
 
-    // Calculate distance between two points
-    const dist = (c1, c2) => Math.sqrt(Math.pow(c1.x - c2.x, 2) + Math.pow(c1.y - c2.y, 2));
+    // Calculate distance (Based on a virtual 1000x1000 grid for consistency)
+    // This prevents distance from changing just because user resized the window
+    const dist = (c1, c2) => {
+        const dx = (c1.x - c2.x) * 1000;
+        const dy = (c1.y - c2.y) * 1000; // Assuming square aspect for math simplicity or keep aspect influence?
+        // To be physically accurate on screen, we should account for aspect ratio,
+        // but for TSP abstract logic, a generalized euclidean distance on square plane is fine.
+        return Math.sqrt(dx * dx + dy * dy);
+    };
 
     // Calculate total path distance
     const calcPathDist = (path) => {
@@ -52,53 +91,45 @@ const PnpVisualizer = () => {
         for (let i = 0; i < path.length - 1; i++) {
             d += dist(path[i], path[i + 1]);
         }
-        // Return to start
         if (path.length > 0) d += dist(path[path.length - 1], path[0]);
         return d;
     };
 
     // --- ALGORITHMS ---
+    // (Algorithms work with normalized coordinates logic wrapped in dist function)
 
-    // 1. Brute Force (Recursive Permutation) - Improved Async Implementation
     const startBruteForce = async () => {
         if (cities.length < 2) return;
         setIsComputing(true);
         setAlgorithm('brute');
         setStats({ time: 0, checked: 0 });
         setProgress(0);
-        setStepDescription('Olası tüm rotalar hesaplanıyor (Brute Force)...');
+        setStepDescription('Olası tüm rotalar hesaplanıyor...');
 
         if (cities.length > 8) {
             alert("Dikkat: 8'den fazla şehir için Brute Force tarayıcınızı dondurabilir!");
         }
 
         let localMin = Infinity;
-        let localBest = [];
         let startTime = performance.now();
         let checkedCount = 0;
 
-        const arr = cities.slice(1); // Keep city 0 fixed
+        const arr = cities.slice(1);
         const startCity = cities[0];
-
-        // Total permutations: (n-1)!
         const factorial = (n) => n <= 1 ? 1 : n * factorial(n - 1);
         const totalPerms = factorial(cities.length - 1);
-
         const swap = (a, i, j) => { let t = a[i]; a[i] = a[j]; a[j] = t; };
 
-        // Iterative Heap's Algorithm
         const n = arr.length;
         const c = new Array(n).fill(0);
         let i = 0;
 
-        // Process First Permutation
         let path = [startCity, ...arr];
         let d = calcPathDist(path);
         localMin = d;
-        localBest = [...path];
         setMinDistance(d);
-        setBestPath(path);
-        setCurrentPath(path);
+        setBestPath([...path]);
+        setCurrentPath([...path]);
         checkedCount++;
 
         while (i < n) {
@@ -113,13 +144,11 @@ const PnpVisualizer = () => {
 
                 if (d < localMin) {
                     localMin = d;
-                    localBest = [...path];
                     setMinDistance(d);
                     setBestPath([...path]);
-                    setStepDescription(`Yeni en kısa yol: ${Math.round(d)} br`);
+                    setStepDescription(`Yeni en kısa yol: ${Math.round(d)} birim`);
                 }
 
-                // Batch progress updates
                 if (checkedCount % Math.max(1, Math.floor(totalPerms / 20)) === 0 || checkedCount === totalPerms) {
                     setProgress(Math.round((checkedCount / totalPerms) * 100));
                     setStats({ time: Math.round(performance.now() - startTime), checked: checkedCount });
@@ -127,7 +156,6 @@ const PnpVisualizer = () => {
 
                 c[i] += 1;
                 i = 0;
-                // Faster delay for brute force
                 if (checkedCount % 5 === 0) await new Promise(r => setTimeout(r, 1));
             } else {
                 c[i] = 0;
@@ -137,13 +165,11 @@ const PnpVisualizer = () => {
 
         setProgress(100);
         setStats({ time: Math.round(performance.now() - startTime), checked: checkedCount });
-        setStepDescription(`Tamamlandı! ${checkedCount} farklı rota denendi.`);
+        setStepDescription(`Tamamlandı! ${checkedCount} rota denendi.`);
         setCurrentPath([]);
         setIsComputing(false);
     };
 
-
-    // 2. Greedy (Nearest Neighbor)
     const solveGreedy = async () => {
         if (cities.length < 2) return;
         setIsComputing(true);
@@ -153,7 +179,7 @@ const PnpVisualizer = () => {
         let startTime = performance.now();
 
         const unvisited = [...cities];
-        const path = [unvisited.shift()]; // Start at first city
+        const path = [unvisited.shift()];
         setBestPath([...path]);
 
         while (unvisited.length > 0) {
@@ -166,7 +192,7 @@ const PnpVisualizer = () => {
 
             for (let i = 0; i < unvisited.length; i++) {
                 const d = dist(current, unvisited[i]);
-                setCurrentPath([current, unvisited[i]]); // Show test line
+                setCurrentPath([current, unvisited[i]]);
                 await new Promise(r => setTimeout(r, 200));
 
                 if (d < minDist) {
@@ -185,32 +211,58 @@ const PnpVisualizer = () => {
         const totalD = calcPathDist(path);
         setMinDistance(totalD);
         setBestPath(path);
-        setStepDescription('Greedy tamamlandı! "En yakın" mantığıyla hızlı bir yol bulundu.');
+        setStepDescription('Greedy tamamlandı! "En yakın" mantığıyla sonuç.');
         setStats({ time: Math.round(performance.now() - startTime), checked: cities.length });
         setCurrentPath([]);
         setIsComputing(false);
     };
 
+    // Helper to scale normalized coordinates to screen pixels
+    const toPx = (normVal, dimension) => normVal * dimension;
+
     return (
-        <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: '24px' }}>
+        <div className="animate-fade-in" style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', width: '100%' }}>
 
             {/* Visualizer Area */}
-            <div style={{ background: '#020617', border: '1px solid #1e293b', borderRadius: '12px', overflow: 'hidden', height: '550px', position: 'relative' }}>
+            <div
+                ref={canvasContainerRef}
+                style={{
+                    background: '#020617',
+                    border: '1px solid #1e293b',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    height: 'clamp(400px, 60vh, 550px)',
+                    position: 'relative',
+                    flex: '2 1 400px', // Responsive flex grow
+                    minWidth: '0'
+                }}
+            >
+                {/* 
+                   Canvas: Used for rendering high-frequency drawings like brute force lines 
+                   Using exact pixel dimensions prevents blur and coordinate mismatch.
+                */}
                 <canvas
                     ref={canvasRef}
-                    width={width}
-                    height={height}
+                    width={dimensions.width}
+                    height={dimensions.height}
                     onClick={handleCanvasClick}
-                    style={{ cursor: isComputing ? 'wait' : 'cell', width: '100%', height: '100%' }}
+                    style={{ cursor: isComputing ? 'wait' : 'cell', display: 'block' }}
                 />
 
-                {/* Overlay UI */}
-                <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-
-                    {/* Active testing path (Gray/Faint) */}
+                {/* 
+                   SVG Overlay: Used for UI elements (Cities, Best Path) that need perfect scaling 
+                   Using the same pixel dimensions for viewBox ensures alignment with canvas.
+                */}
+                <svg
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+                    style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}
+                >
+                    {/* Active testing path (Canvas might be better for this, but consistent SVG use is fine too) */}
                     {isComputing && currentPath.length > 1 && (
                         <path
-                            d={`M ${currentPath.map(c => `${c.x} ${c.y}`).join(' L ')} ${algorithm === 'brute' ? 'Z' : ''}`}
+                            d={`M ${currentPath.map(c => `${toPx(c.x, dimensions.width)} ${toPx(c.y, dimensions.height)}`).join(' L ')} ${algorithm === 'brute' ? 'Z' : ''}`}
                             fill="none"
                             stroke={algorithm === 'brute' ? 'rgba(99, 102, 241, 0.4)' : 'rgba(234, 179, 8, 0.6)'}
                             strokeWidth="2"
@@ -218,10 +270,10 @@ const PnpVisualizer = () => {
                         />
                     )}
 
-                    {/* Best Path Found (Solid Color) */}
+                    {/* Best Path Found */}
                     {bestPath.length > 1 && (
                         <path
-                            d={`M ${bestPath.map(c => `${c.x} ${c.y}`).join(' L ')} Z`}
+                            d={`M ${bestPath.map(c => `${toPx(c.x, dimensions.width)} ${toPx(c.y, dimensions.height)}`).join(' L ')} Z`}
                             fill="none"
                             stroke={algorithm === 'greedy' ? '#f59e0b' : '#10b981'}
                             strokeWidth="4"
@@ -234,8 +286,22 @@ const PnpVisualizer = () => {
                     {/* Cities */}
                     {cities.map((city, i) => (
                         <g key={i}>
-                            <circle cx={city.x} cy={city.y} r="8" fill="#e2e8f0" stroke="#020617" strokeWidth="2" />
-                            <text x={city.x} y={city.y - 12} textAnchor="middle" fill="#94a3b8" fontSize="12" fontWeight="bold">
+                            <circle
+                                cx={toPx(city.x, dimensions.width)}
+                                cy={toPx(city.y, dimensions.height)}
+                                r="8"
+                                fill="#e2e8f0"
+                                stroke="#020617"
+                                strokeWidth="2"
+                            />
+                            <text
+                                x={toPx(city.x, dimensions.width)}
+                                y={toPx(city.y, dimensions.height) - 12}
+                                textAnchor="middle"
+                                fill="#94a3b8"
+                                fontSize="12"
+                                fontWeight="bold"
+                            >
                                 {i + 1}
                             </text>
                         </g>
@@ -251,7 +317,7 @@ const PnpVisualizer = () => {
             </div>
 
             {/* Controls Panel */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: '1 1 300px' }}>
                 <Card>
                     <h3 style={{ margin: '0 0 15px 0', color: 'var(--text-primary)', borderBottom: '1px solid var(--border-medium)', paddingBottom: '10px' }}>
                         Algoritma Durumu
@@ -262,7 +328,8 @@ const PnpVisualizer = () => {
                             padding: '12px',
                             background: 'var(--bg-secondary)',
                             borderRadius: '10px',
-                            border: '1px solid var(--border-light)'
+                            border: '1px solid var(--border-light)',
+                            wordBreak: 'break-word'
                         }}>
                             <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 'bold', marginBottom: '4px' }}>DURUM:</p>
                             <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{stepDescription}</p>
@@ -285,7 +352,7 @@ const PnpVisualizer = () => {
                             </div>
                         )}
 
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '10px' }}>
                             <div style={{ background: 'var(--bg-secondary)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
                                 <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block', marginBottom: '2px' }}>TOPLAM MESAFA</span>
                                 <span style={{ color: 'var(--success)', fontWeight: '700' }}>

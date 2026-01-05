@@ -4,26 +4,26 @@ import { Network, ArrowDown, GitMerge, ListOrdered, CornerDownRight } from 'luci
 
 const TreeTheory = () => {
     return (
-        <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+        <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', width: '100%', maxWidth: '100%' }}>
 
             {/* 8.1 Ağaç Gezinme */}
-            <section>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
                 {/* Alt Başlık Bölümü */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                        <CornerDownRight size={24} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px', flexWrap: 'wrap', width: '100%' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
+                        <CornerDownRight size={typeof window !== 'undefined' && window.innerWidth <= 768 ? 20 : 24} />
                     </div>
-                    <div>
-                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.1. Ağaç Gezinme (Tree Traversal)</h2>
-                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Düğümler üzerinde dolaşma stratejileri: Preorder, Inorder ve Postorder.</p>
+                    <div style={{ flex: 1, minWidth: '0' }}>
+                        <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>8.1. Ağaç Gezinme (Tree Traversal)</h2>
+                        <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Düğümler üzerinde dolaşma stratejileri: Preorder, Inorder ve Postorder.</p>
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px', width: '100%' }}>
 
-                    <Card>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                            <div style={{ padding: '6px', borderRadius: '6px', background: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                            <div style={{ padding: '6px', borderRadius: '6px', background: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa', flexShrink: 0 }}>
                                 <ArrowDown size={20} />
                             </div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>1. Preorder (Önce Kök)</h3>
@@ -36,9 +36,9 @@ const TreeTheory = () => {
                         </p>
                     </Card>
 
-                    <Card>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                            <div style={{ padding: '6px', borderRadius: '6px', background: 'rgba(192, 132, 252, 0.2)', color: '#c084fc' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                            <div style={{ padding: '6px', borderRadius: '6px', background: 'rgba(192, 132, 252, 0.2)', color: '#c084fc', flexShrink: 0 }}>
                                 <ListOrdered size={20} />
                             </div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>2. Inorder (Ortada Kök)</h3>
@@ -51,9 +51,9 @@ const TreeTheory = () => {
                         </p>
                     </Card>
 
-                    <Card>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                            <div style={{ padding: '6px', borderRadius: '6px', background: 'rgba(251, 191, 36, 0.2)', color: '#fbbf24' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                            <div style={{ padding: '6px', borderRadius: '6px', background: 'rgba(251, 191, 36, 0.2)', color: '#fbbf24', flexShrink: 0 }}>
                                 <GitMerge size={20} />
                             </div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>3. Postorder (Sonda Kök)</h3>
@@ -69,17 +69,17 @@ const TreeTheory = () => {
                 </div>
 
                 {/* Görsel Örnek - Improved SVG Diagram */}
-                <div style={{ marginTop: '20px' }}>
-                    <Card>
-                        <h3 style={{ marginTop: 0, marginBottom: '20px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ marginTop: '20px', width: '100%' }}>
+                    <Card style={{ width: '100%' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '20px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                             Görsel Örnek (Trace Analizi)
                             <Badge>Önemli</Badge>
                         </h3>
 
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'flex-start' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'flex-start', width: '100%' }}>
                             {/* Tree SVG */}
-                            <div style={{ flex: '0 0 auto', background: 'var(--bg-secondary)', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-medium)' }}>
-                                <svg width="240" height="180" viewBox="0 0 240 180" style={{ overflow: 'visible' }}>
+                            <div style={{ flex: '0 0 auto', background: 'var(--bg-secondary)', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-medium)', maxWidth: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', width: typeof window !== 'undefined' && window.innerWidth <= 768 ? '100%' : 'auto' }}>
+                                <svg width="240" height="180" viewBox="0 0 240 180" style={{ overflow: 'visible', maxWidth: '100%', height: 'auto' }}>
                                     {/* Edges */}
                                     <line x1="120" y1="30" x2="70" y2="80" stroke="var(--text-muted)" strokeWidth="2" />
                                     <line x1="120" y1="30" x2="170" y2="80" stroke="var(--text-muted)" strokeWidth="2" />
@@ -96,18 +96,18 @@ const TreeTheory = () => {
                             </div>
 
                             {/* Trace Steps */}
-                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '15px', minWidth: '250px' }}>
                                 <div style={{ background: 'var(--bg-primary)', padding: '12px 16px', borderRadius: '8px', borderLeft: '4px solid #60a5fa' }}>
                                     <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Preorder (Kök-Sol-Sağ)</div>
-                                    <div style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 'bold' }}>A, B, D, E, C</div>
+                                    <div style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 'bold', wordBreak: 'break-all' }}>A, B, D, E, C</div>
                                 </div>
                                 <div style={{ background: 'var(--bg-primary)', padding: '12px 16px', borderRadius: '8px', borderLeft: '4px solid #c084fc' }}>
                                     <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Inorder (Sol-Kök-Sağ)</div>
-                                    <div style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 'bold' }}>D, B, E, A, C</div>
+                                    <div style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 'bold', wordBreak: 'break-all' }}>D, B, E, A, C</div>
                                 </div>
                                 <div style={{ background: 'var(--bg-primary)', padding: '12px 16px', borderRadius: '8px', borderLeft: '4px solid #fbbf24' }}>
                                     <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Postorder (Sol-Sağ-Kök)</div>
-                                    <div style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 'bold' }}>D, E, B, C, A</div>
+                                    <div style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 'bold', wordBreak: 'break-all' }}>D, E, B, C, A</div>
                                 </div>
                             </div>
                         </div>
@@ -116,20 +116,20 @@ const TreeTheory = () => {
             </section>
 
             {/* 8.2 Heap */}
-            <section>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
                 {/* Alt Başlık Bölümü */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px', flexWrap: 'wrap', width: '100%' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
                         <CornerDownRight size={24} />
                     </div>
-                    <div>
-                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.2. Heap (Yığın) & Dizi Temelli Ağaçlar</h2>
-                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Maksimum ve minimum değerlere hızlı erişim sağlayan ağaç yapıları.</p>
+                    <div style={{ flex: 1, minWidth: '0' }}>
+                        <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>8.2. Heap (Yığın) & Dizi Temelli Ağaçlar</h2>
+                        <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Maksimum ve minimum değerlere hızlı erişim sağlayan ağaç yapıları.</p>
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '20px' }}>
-                    <Card>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '20px', width: '100%' }}>
+                    <Card style={{ width: '100%' }}>
                         <h3 style={{ marginTop: 0, color: 'var(--text-primary)' }}>Heap Özellikleri</h3>
                         <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
                             <li><strong style={{ color: 'var(--text-primary)' }}>Max Heap:</strong> Kök en büyük, ebeveynler çocuklardan büyük.</li>
@@ -139,23 +139,23 @@ const TreeTheory = () => {
                         </ul>
                     </Card>
 
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h3 style={{ marginTop: 0, color: 'var(--primary)' }}>Dizi İndis İlişkisi (Array Mapping)</h3>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '15px' }}>
                             Heap hafızada verimli olmak için <strong>Dizi (Array)</strong> üzerinde tutulur. Köke <code>i=1</code> (veya 0) dersek:
                         </p>
 
-                        <div style={{ background: 'var(--bg-primary)', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border-medium)' }}>
+                        <div style={{ background: 'var(--bg-primary)', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border-medium)', width: '100%' }}>
                             <div style={{ display: 'flex', borderBottom: '1px solid var(--border-light)', padding: '10px' }}>
-                                <span style={{ width: '120px', color: 'var(--text-secondary)' }}>Sol Çocuk:</span>
+                                <span style={{ width: '120px', color: 'var(--text-secondary)', flexShrink: 0 }}>Sol Çocuk:</span>
                                 <span style={{ fontFamily: 'monospace', color: '#60a5fa', fontWeight: 'bold' }}>2 * i</span>
                             </div>
                             <div style={{ display: 'flex', borderBottom: '1px solid var(--border-light)', padding: '10px' }}>
-                                <span style={{ width: '120px', color: 'var(--text-secondary)' }}>Sağ Çocuk:</span>
+                                <span style={{ width: '120px', color: 'var(--text-secondary)', flexShrink: 0 }}>Sağ Çocuk:</span>
                                 <span style={{ fontFamily: 'monospace', color: '#60a5fa', fontWeight: 'bold' }}>2 * i + 1</span>
                             </div>
                             <div style={{ display: 'flex', padding: '10px' }}>
-                                <span style={{ width: '120px', color: 'var(--text-secondary)' }}>Ebeveyn:</span>
+                                <span style={{ width: '120px', color: 'var(--text-secondary)', flexShrink: 0 }}>Ebeveyn:</span>
                                 <span style={{ fontFamily: 'monospace', color: '#60a5fa', fontWeight: 'bold' }}>⌊ i / 2 ⌋</span>
                             </div>
                         </div>
@@ -164,20 +164,20 @@ const TreeTheory = () => {
             </section>
 
             {/* 8.3 Dengeli Ağaçlar */}
-            <section>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
                 {/* Alt Başlık Bölümü */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                        <CornerDownRight size={24} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px', flexWrap: 'wrap', width: '100%' }}>
+                    <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
+                        <CornerDownRight size={typeof window !== 'undefined' && window.innerWidth <= 768 ? 20 : 24} />
                     </div>
-                    <div>
-                        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.3. Dengeli Ağaçlar (Balanced Trees)</h2>
-                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Arama performansını O(log N) seviyesinde tutmak için ağacı dengeleme yöntemleri.</p>
+                    <div style={{ flex: 1, minWidth: '0' }}>
+                        <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>8.3. Dengeli Ağaçlar (Balanced Trees)</h2>
+                        <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Arama performansını O(log N) seviyesinde tutmak için ağacı dengeleme yöntemleri.</p>
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                    <Card>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px', width: '100%' }}>
+                    <Card style={{ width: '100%' }}>
                         <h3 style={{ marginTop: 0, color: 'var(--text-primary)' }}>Neden Önemli?</h3>
                         <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>
                             Ağacın <strong>derinliği (height)</strong> performansı belirler. Eğer sağ ve sol alt ağaçların derinlik farkı çok açılırsa (örn: &gt;1), ağaç <strong>dengesizleşir</strong>.
@@ -188,7 +188,7 @@ const TreeTheory = () => {
                         </div>
                     </Card>
 
-                    <Card>
+                    <Card style={{ width: '100%' }}>
                         <h3 style={{ marginTop: 0, color: 'var(--text-primary)' }}>Dengeli (Balanced) Durum</h3>
                         <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>
                             Sağ ve sol derinlik farkı en fazla 1 ise ağaç dengelidir. Bu durumda arama işlemleri her zaman çok hızlıdır.

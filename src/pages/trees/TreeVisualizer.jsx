@@ -229,6 +229,11 @@ const TreeVisualizer = () => {
     // Styles
     const containerStyle = {
         background: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--space-xl)',
+        width: '100%',
+        maxWidth: '100%'
     };
 
     const cardStyle = {
@@ -236,8 +241,9 @@ const TreeVisualizer = () => {
         border: '1px solid var(--border-medium)',
         borderRadius: '12px',
         padding: '20px',
-        marginBottom: '24px',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        width: '100%',
+        maxWidth: '100%'
     };
 
     const inputStyle = {
@@ -250,6 +256,8 @@ const TreeVisualizer = () => {
         outline: 'none',
         fontSize: '0.95rem',
         transition: 'border-color 0.2s',
+        minWidth: '100px',
+        flex: '1'
     };
 
     const iconButtonStyle = (type) => ({
@@ -258,7 +266,8 @@ const TreeVisualizer = () => {
         color: 'white', border: 'none', borderRadius: '8px',
         width: '40px', height: '40px', cursor: isAnimating ? 'not-allowed' : 'pointer',
         opacity: isAnimating ? 0.6 : 1,
-        transition: 'transform 0.1s'
+        transition: 'transform 0.1s',
+        flexShrink: 0
     });
 
     const actionButtonStyle = (color, isActive) => ({
@@ -272,64 +281,84 @@ const TreeVisualizer = () => {
         cursor: isAnimating ? 'not-allowed' : 'pointer',
         opacity: isAnimating ? 0.6 : 1,
         transition: 'all 0.2s',
-        display: 'flex', alignItems: 'center', gap: '8px'
+        display: 'flex', alignItems: 'center', gap: '8px',
+        flex: '1',
+        justifyContent: 'center',
+        minWidth: '120px'
     });
 
     return (
         <div style={containerStyle} className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap', width: '100%' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
+                    <CornerDownRight size={typeof window !== 'undefined' && window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>8.4. İnteraktif Ağaç Görselleştirici</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Kendi ikili arama ağacınızı (BST) oluşturun, düğümleri silin ve gezinme yöntemlerini test edin.</p>
+                <div style={{ flex: 1, minWidth: '0' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>8.4. İnteraktif Ağaç Görselleştirici</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Kendi ikili arama ağacınızı (BST) oluşturun, düğümleri silin ve gezinme yöntemlerini test edin.</p>
                 </div>
             </div>
             {/* Controls */}
-            <div style={{ ...cardStyle, display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                    <input
-                        type="number"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="Sayı gir..."
-                        style={inputStyle}
-                        onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
-                        onFocus={(e) => e.target.style.borderColor = '#60a5fa'}
-                        onBlur={(e) => e.target.style.borderColor = 'var(--border-medium)'}
-                    />
-                    <button onClick={handleAdd} disabled={isAnimating} style={iconButtonStyle('add')} title="Ekle">
-                        <Plus size={20} />
-                    </button>
-                    <button onClick={() => { setRoot(null); setTraversalResult([]); }} disabled={isAnimating} style={iconButtonStyle('delete')} title="Temizle">
-                        <Trash2 size={20} />
-                    </button>
-                </div>
+            <div style={{ ...cardStyle }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(12px, 3vw, 20px)', alignItems: 'center', width: '100%' }}>
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'nowrap', flexGrow: 1, minWidth: '250px' }}>
+                        <input
+                            type="number"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            placeholder="Sayı gir..."
+                            style={inputStyle}
+                            onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
+                            onFocus={(e) => e.target.style.borderColor = '#60a5fa'}
+                            onBlur={(e) => e.target.style.borderColor = 'var(--border-medium)'}
+                        />
+                        <button onClick={handleAdd} disabled={isAnimating} style={iconButtonStyle('add')} title="Ekle">
+                            <Plus size={20} />
+                        </button>
+                        <button onClick={() => { setRoot(null); setTraversalResult([]); }} disabled={isAnimating} style={iconButtonStyle('delete')} title="Temizle">
+                            <Trash2 size={20} />
+                        </button>
+                    </div>
 
-                <div style={{ width: '1px', height: '35px', background: 'var(--border-medium)', margin: '0 10px' }}></div>
+                    <div className="hidden-mobile" style={{ width: '1px', height: '35px', background: 'var(--border-medium)', margin: '0 10px', display: typeof window !== 'undefined' && window.innerWidth <= 768 ? 'none' : 'block' }}></div>
 
-                <div style={{ display: 'flex', gap: '12px' }}>
-                    <button onClick={() => runTraversal('pre')} disabled={isAnimating} style={actionButtonStyle('#2563eb', false)}>
-                        <Play size={16} /> Preorder
-                    </button>
-                    <button onClick={() => runTraversal('in')} disabled={isAnimating} style={actionButtonStyle('#9333ea', false)}>
-                        <Play size={16} /> Inorder
-                    </button>
-                    <button onClick={() => runTraversal('post')} disabled={isAnimating} style={actionButtonStyle('#d97706', false)}>
-                        <Play size={16} /> Postorder
-                    </button>
+                    <div style={{ display: 'flex', gap: 'clamp(8px, 2vw, 12px)', flexWrap: 'wrap', flexGrow: 2 }}>
+                        <button onClick={() => runTraversal('pre')} disabled={isAnimating} style={actionButtonStyle('#2563eb', false)}>
+                            <Play size={16} /> Preorder
+                        </button>
+                        <button onClick={() => runTraversal('in')} disabled={isAnimating} style={actionButtonStyle('#9333ea', false)}>
+                            <Play size={16} /> Inorder
+                        </button>
+                        <button onClick={() => runTraversal('post')} disabled={isAnimating} style={actionButtonStyle('#d97706', false)}>
+                            <Play size={16} /> Postorder
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: '24px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(16px, 3vw, 24px)', width: '100%' }}>
                 {/* Visualization Area */}
                 <div
                     onClick={() => setSelectedNode(null)}
-                    style={{ ...cardStyle, padding: 0, height: '550px', overflow: 'hidden', position: 'relative', background: 'var(--bg-secondary)', border: '1px solid var(--border-medium)' }}
+                    style={{
+                        ...cardStyle,
+                        padding: 0,
+                        height: 'clamp(400px, 60vh, 550px)',
+                        overflow: 'hidden',
+                        position: 'relative',
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border-medium)',
+                        flex: '2 1 400px', // Grow 2, Shrink 1, Basis 400px
+                        minWidth: '0' // Flex item taşmasını engeller
+                    }}
                 >
-                    <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
+                    <svg
+                        width="100%"
+                        height="100%"
+                        viewBox={`0 0 ${width} ${height}`}
+                        preserveAspectRatio="xMidYMid meet"
+                    >
                         <defs>
                             <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                                 <stop offset="0%" stopColor="var(--bg-secondary)" />
@@ -342,13 +371,14 @@ const TreeVisualizer = () => {
                         </defs>
                         {renderTree(root)}
                     </svg>
-                    <div style={{ position: 'absolute', top: 20, left: 20, color: 'var(--text-muted)', fontSize: '1rem', pointerEvents: 'none', fontWeight: 'bold' }}>
+                    {/* Yazıyı sol alt köşeye taşıdım */}
+                    <div style={{ position: 'absolute', bottom: 10, left: 20, color: 'var(--text-muted)', fontSize: '0.9rem', pointerEvents: 'none', fontWeight: 'bold' }}>
                         Binary Search Tree (BST)
                     </div>
                 </div>
 
                 {/* Status Panel & Definitions */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: '1 1 300px' }}>
 
                     {/* Status */}
                     <div style={{ ...cardStyle, marginBottom: 0, display: 'flex', flexDirection: 'column' }}>
@@ -357,7 +387,7 @@ const TreeVisualizer = () => {
                             Gezinme Sonucu
                         </h3>
 
-                        <div style={{ flex: 1, minHeight: '100px', background: 'var(--bg-primary)', borderRadius: '10px', padding: '16px', fontFamily: 'monospace', fontSize: '0.9rem', overflowY: 'auto', border: '1px solid var(--border-medium)' }}>
+                        <div style={{ flex: 1, minHeight: '100px', background: 'var(--bg-primary)', borderRadius: '10px', padding: '16px', fontFamily: 'monospace', fontSize: '0.9rem', overflowY: 'auto', border: '1px solid var(--border-medium)', wordBreak: 'break-word' }}>
                             {traversalResult.length > 0 ? (
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                                     {traversalResult.map((val, idx) => (

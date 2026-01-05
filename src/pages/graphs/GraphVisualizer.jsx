@@ -165,6 +165,11 @@ const GraphVisualizer = () => {
         background: 'var(--bg-primary, #0f172a)',
         color: 'var(--text-primary)',
         minHeight: '100vh',
+        width: '100%',
+        maxWidth: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px'
     };
 
     const cardStyle = {
@@ -174,8 +179,9 @@ const GraphVisualizer = () => {
         borderStyle: 'solid',
         borderRadius: '12px',
         padding: '24px',
-        marginBottom: '24px',
-        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        width: '100%',
+        maxWidth: '100%'
     };
 
     const buttonStyle = (variant) => ({
@@ -197,7 +203,9 @@ const GraphVisualizer = () => {
         boxShadow: variant !== 'stop' ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' : 'none',
         opacity: isRunning && variant !== 'stop' ? 0.6 : 1,
         transition: 'all 0.2s ease-in-out',
-        transform: isRunning ? 'none' : 'scale(1)'
+        transform: isRunning ? 'none' : 'scale(1)',
+        flex: 1, // Butonların eşit genişlikte olması için
+        minWidth: '120px'
     });
 
     const selectStyle = {
@@ -212,22 +220,22 @@ const GraphVisualizer = () => {
     };
 
     return (
-        <div style={containerStyle} className="animate-fade-in space-y-6">
+        <div style={containerStyle} className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', flexWrap: 'wrap', width: '100%' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
+                    <CornerDownRight size={typeof window !== 'undefined' && window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>7.3 Graf Algoritmaları Simülatörü</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Popüler graf algoritmalarını canlı izleyin, kenar ağırlıklarını ve düğümleri görün.</p>
+                <div style={{ flex: 1, minWidth: '0' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>7.3 Graf Algoritmaları Simülatörü</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Popüler graf algoritmalarını canlı izleyin, kenar ağırlıklarını ve düğümleri görün.</p>
                 </div>
             </div>
 
             {/* CONTROL PANEL */}
             <div style={cardStyle}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    <div style={{ display: 'flex', gap: '20px', alignItems: 'end', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
+                    <div style={{ display: 'flex', gap: '20px', alignItems: 'end', flexWrap: 'wrap', width: '100%' }}>
                         <div style={{ flex: 1, minWidth: '250px' }}>
                             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-secondary, #94a3b8)', textTransform: 'uppercase' }}>
                                 ALGORİTMA SEÇİN
@@ -252,7 +260,7 @@ const GraphVisualizer = () => {
                             </select>
                         </div>
 
-                        <div style={{ display: 'flex', gap: '12px' }}>
+                        <div style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '250px' }}>
                             <button onClick={handleGenerate} disabled={isRunning} style={buttonStyle('default')}>
                                 <Shuffle size={18} /> Yeni Graf
                             </button>
@@ -266,41 +274,44 @@ const GraphVisualizer = () => {
             </div>
 
             {/* GRAPH VISUALIZATION */}
-            <div style={{ ...cardStyle, padding: 0, position: 'relative', height: '600px', overflow: 'hidden', background: '#020617' }}>
+            <div style={{ ...cardStyle, padding: 0, position: 'relative', height: 'clamp(400px, 60vh, 600px)', overflow: 'hidden', background: '#020617' }}>
                 {/* Legend */}
                 <div style={{
                     position: 'absolute', top: 20, left: 20,
                     background: 'rgba(15, 23, 42, 0.9)',
                     padding: '15px', borderRadius: '8px',
                     border: '1px solid var(--border-color)',
-                    pointerEvents: 'none'
+                    pointerEvents: 'none',
+                    zIndex: 10,
+                    maxWidth: '80%', // Mobilde taşmayı engelle
                 }}>
                     <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#94a3b8', marginBottom: '10px' }}>LEJANT</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', fontSize: '0.85rem' }}>
-                        <div style={{ width: 10, height: 10, borderRadius: '50%', background: COLORS.selected }}></div>
+                        <div style={{ width: 10, height: 10, borderRadius: '50%', background: COLORS.selected, flexShrink: 0 }}></div>
                         <span style={{ color: COLORS.selected }}>Seçildi / Yol</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', fontSize: '0.85rem' }}>
-                        <div style={{ width: 10, height: 10, borderRadius: '50%', background: COLORS.checking }}></div>
+                        <div style={{ width: 10, height: 10, borderRadius: '50%', background: COLORS.checking, flexShrink: 0 }}></div>
                         <span style={{ color: COLORS.checking }}>Kontrol Ediliyor</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', fontSize: '0.85rem' }}>
-                        <div style={{ width: 10, height: 10, borderRadius: '50%', background: COLORS.rejected }}></div>
+                        <div style={{ width: 10, height: 10, borderRadius: '50%', background: COLORS.rejected, flexShrink: 0 }}></div>
                         <span style={{ color: COLORS.rejected }}>Reddedildi</span>
                     </div>
                 </div>
 
-                <div style={{ position: 'absolute', right: 20, top: 20, color: '#64748b', fontSize: '0.8rem' }}>
+                <div style={{ position: 'absolute', right: 20, top: 20, color: '#64748b', fontSize: '0.8rem', textAlign: 'right', display: window.innerWidth <= 768 ? 'none' : 'block' }}>
                     Düğümleri sürükleyebilirsiniz
                 </div>
 
                 <svg
                     width="100%" height="100%"
                     viewBox={`0 0 ${width} ${height}`}
+                    preserveAspectRatio="xMidYMid meet"
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseLeave}
-                    style={{ cursor: draggingNodeId ? 'grabbing' : 'default' }}
+                    style={{ cursor: draggingNodeId ? 'grabbing' : 'default', width: '100%', height: '100%' }}
                 >
                     <defs>
                         <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -378,13 +389,14 @@ const GraphVisualizer = () => {
                 <div style={{
                     padding: '16px', background: 'rgba(255,255,255,0.03)',
                     borderBottom: '1px solid var(--border-color)',
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    flexWrap: 'wrap'
                 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-primary)', fontWeight: 'bold' }}>
                         <ScrollText size={18} /> SİMÜLASYON ANLIK İZLEME
                     </div>
                 </div>
-                <div ref={logContainerRef} style={{ flex: 1, overflowY: 'auto', padding: '16px', fontFamily: 'monospace', fontSize: '0.9rem' }}>
+                <div ref={logContainerRef} style={{ flex: 1, overflowY: 'auto', padding: '16px', fontFamily: 'monospace', fontSize: '0.9rem', overflowX: 'hidden' }}>
                     {logs.length === 0 ? (
                         <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: 0.4 }}>
                             <Info size={32} style={{ marginBottom: 10 }} />
@@ -412,9 +424,10 @@ const GraphVisualizer = () => {
                                         padding: '10px 14px', borderRadius: '4px',
                                         borderLeft: `3px solid ${borderColor}`,
                                         background: bg, color: color,
-                                        display: 'flex', gap: '10px'
+                                        display: 'flex', gap: '10px',
+                                        wordBreak: 'break-word'
                                     }} className="animate-slide-in-left">
-                                        <span style={{ opacity: 0.5, fontSize: '0.8rem', minWidth: '20px' }}>{(i + 1).toString().padStart(2, '0')}</span>
+                                        <span style={{ opacity: 0.5, fontSize: '0.8rem', minWidth: '20px', flexShrink: 0 }}>{(i + 1).toString().padStart(2, '0')}</span>
                                         <span>{log.text}</span>
                                     </div>
                                 )

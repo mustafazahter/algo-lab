@@ -52,16 +52,20 @@ export const Badge = ({ children, type = 'primary', variant, icon }) => {
 
 export const PageHeader = ({ title, subtitle }) => {
     return (
-        <div style={{ marginBottom: 'var(--space-2xl)' }}>
-            <h1 className="text-gradient animate-fade-in" style={{ fontSize: '2.5rem', marginBottom: 'var(--space-sm)' }}>
+        <div style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
+            <h1 className="text-gradient animate-fade-in text-heading" style={{ marginBottom: 'var(--space-sm)' }}>
                 {title}
             </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '700px', lineHeight: 1.6 }}>
+            <p className="text-body" style={{
+                color: 'var(--text-secondary)',
+                maxWidth: '700px',
+                lineHeight: 1.6
+            }}>
                 {subtitle}
             </p>
             <div style={{
                 height: '1px',
-                width: '100px',
+                width: 'clamp(60px, 15vw, 100px)',
                 background: 'linear-gradient(90deg, var(--primary), transparent)',
                 marginTop: 'var(--space-lg)'
             }} />

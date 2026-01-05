@@ -82,29 +82,29 @@ const Home = () => {
     ];
 
     return (
-        <div className="animate-fade-in" style={{ paddingBottom: 'var(--space-2xl)' }}>
-            <div style={{ marginBottom: 'var(--space-2xl)', maxWidth: '800px' }}>
-                <h1 style={{ fontSize: '3.5rem', marginBottom: 'var(--space-sm)', lineHeight: 1.1, fontWeight: '800' }}>
+        <div className="animate-fade-in section-padding" style={{ paddingBottom: 'var(--space-2xl)' }}>
+            <div style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)', maxWidth: '800px' }}>
+                <h1 className="text-display" style={{ marginBottom: 'var(--space-sm)', lineHeight: 1.1, fontWeight: '800' }}>
                     <span className="text-gradient">Algoritma Laboratuvarı</span>
                 </h1>
-                <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                <p className="text-body" style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
                     Geleceğin mühendisleri için interaktif bir keşif alanı.
                     Karmaşık yapıları görselleştirin, algoritmaları canlı simülasyonlarla deneyimleyin.
                 </p>
-                <div style={{ height: '2px', width: '60px', background: 'var(--primary)', marginTop: 'var(--space-lg)' }} />
+                <div style={{ height: '2px', width: 'clamp(40px, 10vw, 60px)', background: 'var(--primary)', marginTop: 'var(--space-lg)' }} />
             </div>
 
-            <div className="grid-responsive" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
+            <div className="grid-responsive" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: 'clamp(16px, 3vw, 20px)' }}>
                 {modules.map((module, idx) => (
                     <Link key={idx} to={module.path} style={{ textDecoration: 'none', display: 'block' }}>
                         <Card className="hover-card" style={{
                             height: '100%',
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             cursor: 'pointer',
-                            padding: 'var(--space-xl)',
+                            padding: 'clamp(1.25rem, 4vw, 2.5rem)',
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '15px',
+                            gap: 'clamp(12px, 3vw, 15px)',
                             background: 'var(--bg-card)',
                             border: '1px solid var(--border-light)',
                             overflow: 'hidden',

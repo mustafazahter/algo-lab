@@ -1,41 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Badge } from '../../components/ui/Common';
 import { CornerDownRight, Puzzle, Clock, CheckCircle, AlertTriangle, Zap, Key, Lock } from 'lucide-react';
 
 const PnpTheory = () => {
+    const [isDesktop, setIsDesktop] = useState(true);
+
+    useEffect(() => {
+        const checkDesktop = () => setIsDesktop(window.innerWidth > 1024);
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+        return () => window.removeEventListener('resize', checkDesktop);
+    }, []);
+
     return (
-        <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+        <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', width: '100%', maxWidth: '100%' }}>
 
             {/* Header Section */}
-            {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px', width: '100%', flexWrap: 'wrap' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
                     <CornerDownRight size={24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>9.1 Karmaşıklık Teorisi (P vs NP)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Bilgisayar bilimlerinin en büyük çözülememiş problemi: P = NP mi?</p>
+                <div style={{ flex: 1, minWidth: '0' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>9.1 Karmaşıklık Teorisi (P vs NP)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Bilgisayar bilimlerinin en büyük çözülememiş problemi: P = NP mi?</p>
                 </div>
             </div>
 
-            {/* Main Content Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '24px' }}>
+            {/* Main Content Grid - 2x2 on Desktop */}
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: isDesktop ? '1fr 1fr' : '1fr',
+                gap: '24px',
+                width: '100%'
+            }}>
 
                 {/* 1. P Class */}
-                <Card>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                        <div style={{ padding: '10px', background: 'rgba(34, 197, 94, 0.1)', borderRadius: '10px', color: '#4ade80' }}>
+                <Card style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                        <div style={{ padding: '10px', background: 'rgba(34, 197, 94, 0.1)', borderRadius: '10px', color: '#4ade80', flexShrink: 0 }}>
                             <Zap size={24} />
                         </div>
-                        <div>
-                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)' }}>P (Polynomial)</h2>
+                        <div style={{ minWidth: 0 }}>
+                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>P (Polynomial)</h2>
                             <span style={{ fontSize: '0.85rem', color: '#4ade80' }}>Kolay Çözülür</span>
                         </div>
                     </div>
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px' }}>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px', flex: 1 }}>
                         Bugünkü bilgisayarların makul sürede (polinom zaman) çözebildiği problemlerdir. Çözümü bulmak hızlıdır.
                     </p>
-                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)' }}>
+                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)', marginTop: 'auto' }}>
                         <strong style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block', marginBottom: '8px', letterSpacing: '1px', fontWeight: 'bold' }}>ÖRNEKLER</strong>
                         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             <Badge variant="success">Sıralama (Sorting)</Badge>
@@ -46,40 +59,40 @@ const PnpTheory = () => {
                 </Card>
 
                 {/* 2. NP Class */}
-                <Card>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                        <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '10px', color: '#818cf8' }}>
+                <Card style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                        <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '10px', color: '#818cf8', flexShrink: 0 }}>
                             <CheckCircle size={24} />
                         </div>
-                        <div>
-                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)' }}>NP (Non-deterministic Polynomial)</h2>
+                        <div style={{ minWidth: 0 }}>
+                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>NP (Non-deterministic Polynomial)</h2>
                             <span style={{ fontSize: '0.85rem', color: '#818cf8' }}>Kolay Kontrol Edilir</span>
                         </div>
                     </div>
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px' }}>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px', flex: 1 }}>
                         Çözümü bulmak zor olabilir, ama birisi size bir çözüm verirse doğruluğunu kontrol etmek çok kolaydır.
                     </p>
-                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)' }}>
+                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)', marginTop: 'auto' }}>
                         <strong style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block', marginBottom: '8px', letterSpacing: '1px', fontWeight: 'bold' }}>ÖRNEK</strong>
                         <span style={{ color: 'var(--text-primary)', fontSize: '0.95rem', fontWeight: '500' }}>Sudoku (Çözmek zor, kontrol etmek kolay)</span>
                     </div>
                 </Card>
 
                 {/* 3. NP-Complete */}
-                <Card>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                        <div style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '10px', color: '#f87171' }}>
+                <Card style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                        <div style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '10px', color: '#f87171', flexShrink: 0 }}>
                             <AlertTriangle size={24} />
                         </div>
-                        <div>
-                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)' }}>NP-Complete</h2>
+                        <div style={{ minWidth: 0 }}>
+                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>NP-Complete</h2>
                             <span style={{ fontSize: '0.85rem', color: '#f87171' }}>En Zor Problemler</span>
                         </div>
                     </div>
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px' }}>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px', flex: 1 }}>
                         NP kümesindeki en zor problemlerdir. Bunlardan <strong>bir tanesini</strong> bile hızlı çözen bir algoritma bulunursa, dünyadaki tüm şifreleme sistemleri çöker.
                     </p>
-                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)' }}>
+                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)', marginTop: 'auto' }}>
                         <strong style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block', marginBottom: '8px', letterSpacing: '1px', fontWeight: 'bold' }}>ÖRNEKLER</strong>
                         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             <Badge variant="danger">TSP (Gezgin Satıcı)</Badge>
@@ -90,20 +103,20 @@ const PnpTheory = () => {
                 </Card>
 
                 {/* 4. NP-Hard */}
-                <Card>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                        <div style={{ padding: '10px', background: 'rgba(168, 85, 247, 0.1)', borderRadius: '10px', color: '#a855f7' }}>
+                <Card style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                        <div style={{ padding: '10px', background: 'rgba(168, 85, 247, 0.1)', borderRadius: '10px', color: '#a855f7', flexShrink: 0 }}>
                             <Zap size={24} />
                         </div>
-                        <div>
-                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)' }}>NP-Hard</h2>
+                        <div style={{ minWidth: 0 }}>
+                            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)', wordBreak: 'break-word' }}>NP-Hard</h2>
                             <span style={{ fontSize: '0.85rem', color: '#a855f7' }}>Hesaplamanın Sınırı</span>
                         </div>
                     </div>
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px' }}>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '15px', flex: 1 }}>
                         NP'ye ait olması şart değildir ama en az NP'deki en zor problem kadar zordur. Çözümün kontrol edilmesi bile polinom zamanın üzerinde olabilir.
                     </p>
-                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)' }}>
+                    <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border-light)', marginTop: 'auto' }}>
                         <strong style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block', marginBottom: '8px', letterSpacing: '1px', fontWeight: 'bold' }}>ÖRNEKLER</strong>
                         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             <Badge type="primary">Halting Problem</Badge>
@@ -116,17 +129,23 @@ const PnpTheory = () => {
             </div>
 
             {/* Analogy Section */}
-            <section style={{ marginTop: '20px' }}>
-                <Card style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05))', border: '1px solid var(--primary-glow)' }}>
-                    <h3 style={{ marginTop: 0, marginBottom: '25px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <section style={{ marginTop: '20px', width: '100%' }}>
+                <Card style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05))', border: '1px solid var(--primary-glow)', width: '100%' }}>
+                    <h3 style={{ marginTop: 0, marginBottom: '25px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                         <Key size={24} color="var(--primary)" />
                         Anahtar & Kilit Analojisi
                     </h3>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
+                    <div style={{
+                        display: 'grid',
+                        // BURASI GÜNCELLENDİ: Masaüstünde (isDesktop=true) 2 sütun (1fr 1fr), mobilde tek sütun.
+                        gridTemplateColumns: isDesktop ? '1fr 1fr' : '1fr',
+                        gap: '24px',
+                        width: '100%'
+                    }}>
                         {/* P */}
                         <div style={{ background: 'var(--bg-card)', padding: '20px', borderRadius: '16px', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px', flexWrap: 'wrap' }}>
                                 <Badge variant="success">P Sınıfı</Badge>
                                 <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>Anahtarı Cebinde Olan</span>
                             </div>
@@ -139,7 +158,7 @@ const PnpTheory = () => {
 
                         {/* NP */}
                         <div style={{ background: 'var(--bg-card)', padding: '20px', borderRadius: '16px', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px', flexWrap: 'wrap' }}>
                                 <Badge variant="primary">NP Sınıfı</Badge>
                                 <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>Milyonlarca Anahtar</span>
                             </div>
@@ -152,7 +171,7 @@ const PnpTheory = () => {
 
                         {/* NP-Complete */}
                         <div style={{ background: 'var(--bg-card)', padding: '20px', borderRadius: '16px', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px', flexWrap: 'wrap' }}>
                                 <Badge variant="warning">NP-Complete</Badge>
                                 <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>Sihirli Maymuncuk</span>
                             </div>
@@ -166,7 +185,7 @@ const PnpTheory = () => {
 
                         {/* NP-Hard */}
                         <div style={{ background: 'var(--bg-card)', padding: '20px', borderRadius: '16px', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px', flexWrap: 'wrap' }}>
                                 <Badge variant="danger">NP-Hard</Badge>
                                 <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>Efsanevi Kasa</span>
                             </div>
@@ -194,10 +213,10 @@ const PnpTheory = () => {
             </section>
 
             {/* Venn Diagram Visual */}
-            <div style={{ marginTop: '20px' }}>
-                <Card>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '40px', alignItems: 'center' }}>
-                        <div>
+            <div style={{ marginTop: '20px', width: '100%' }}>
+                <Card style={{ width: '100%' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', alignItems: 'center', width: '100%' }}>
+                        <div style={{ flex: '1 1 300px', minWidth: '0' }}>
                             <h3 style={{ fontSize: '1.5rem', marginBottom: '15px', color: 'var(--text-primary)' }}>İlişki Diyagramı</h3>
                             <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', lineHeight: '1.6' }}>
                                 Tüm <strong>P</strong> problemleri aynı zamanda <strong>NP</strong>'dir. Ancak tüm NP problemleri P midir? Bunu henüz kimse bilmiyor.
@@ -213,8 +232,8 @@ const PnpTheory = () => {
                         </div>
 
                         {/* Custom SVG Venn Diagram */}
-                        <div style={{ position: 'relative', height: '300px', width: '300px' }}>
-                            <svg viewBox="0 0 400 400" width="100%" height="100%">
+                        <div style={{ position: 'relative', height: '300px', width: '300px', maxWidth: '100%', margin: '0 auto' }}>
+                            <svg viewBox="0 0 400 400" width="100%" height="100%" style={{ overflow: 'visible' }}>
                                 <defs>
                                     <filter id="glow">
                                         <feGaussianBlur stdDeviation="4" result="coloredBlur" />

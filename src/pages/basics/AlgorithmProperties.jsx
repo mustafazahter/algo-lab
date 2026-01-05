@@ -70,13 +70,13 @@ const AlgorithmProperties = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>1.1. Algoritmanın Temel Özellikleri</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Bir prosedürün 'Algoritma' sayılabilmesi için gereken 5 altın kural.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>1.1. Algoritmanın Temel Özellikleri</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Bir prosedürün 'Algoritma' sayılabilmesi için gereken 5 altın kural.</p>
                 </div>
             </div>
 
@@ -101,32 +101,52 @@ const AlgorithmProperties = () => {
             </div>
 
             {/* İnteraktif Simülasyon */}
-            <h2 style={{ fontSize: '1.8rem', marginBottom: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Search size={28} /> Algoritma Dedektifi
+            <h2 className="text-subheading" style={{ marginBottom: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <Search size={window.innerWidth <= 768 ? 22 : 28} /> Algoritma Dedektifi
             </h2>
 
-            <Card style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: 'var(--space-xl)' }}>
+            <Card style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: 'clamp(1.25rem, 4vw, 2.5rem)' }}>
                 <div style={{ marginBottom: 'var(--space-lg)' }}>
                     <Badge type="primary">Senaryo {currentScenario + 1}/{scenarios.length}</Badge>
                 </div>
 
-                <h3 style={{ fontSize: '1.4rem', marginBottom: 'var(--space-xl)', minHeight: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.4rem)', marginBottom: 'var(--space-xl)', minHeight: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 var(--space-sm)' }}>
                     "{scenarios[currentScenario].text}"
                 </h3>
 
                 {feedback === null ? (
-                    <div style={{ display: 'flex', gap: 'var(--space-lg)', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 24px)', justifyContent: 'center', flexWrap: 'wrap', width: '100%', maxWidth: '600px', margin: '0 auto' }}>
                         <button
                             onClick={() => handleAnswer(true)}
                             className="hover-scale"
-                            style={{ padding: '15px 40px', background: 'var(--success)', color: 'white', borderRadius: 'var(--radius-md)', fontSize: '1.1rem', fontWeight: 'bold' }}
+                            style={{
+                                padding: 'clamp(12px, 3vw, 15px) clamp(30px, 8vw, 40px)',
+                                background: 'var(--success)',
+                                color: 'white',
+                                borderRadius: 'var(--radius-md)',
+                                fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
+                                fontWeight: 'bold',
+                                flex: '1 1 auto',
+                                minWidth: 'clamp(120px, 40vw, 180px)',
+                                whiteSpace: 'nowrap'
+                            }}
                         >
                             Algoritmadır
                         </button>
                         <button
                             onClick={() => handleAnswer(false)}
                             className="hover-scale"
-                            style={{ padding: '15px 40px', background: 'var(--danger)', color: 'white', borderRadius: 'var(--radius-md)', fontSize: '1.1rem', fontWeight: 'bold' }}
+                            style={{
+                                padding: 'clamp(12px, 3vw, 15px) clamp(30px, 8vw, 40px)',
+                                background: 'var(--danger)',
+                                color: 'white',
+                                borderRadius: 'var(--radius-md)',
+                                fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
+                                fontWeight: 'bold',
+                                flex: '1 1 auto',
+                                minWidth: 'clamp(120px, 40vw, 180px)',
+                                whiteSpace: 'nowrap'
+                            }}
                         >
                             Değildir
                         </button>
@@ -134,14 +154,14 @@ const AlgorithmProperties = () => {
                 ) : (
                     <div className="animate-fade-in">
                         <div style={{
-                            fontSize: '1.2rem',
+                            fontSize: 'clamp(1rem, 3vw, 1.2rem)',
                             fontWeight: 'bold',
                             color: feedback === 'correct' ? 'var(--success)' : 'var(--danger)',
                             marginBottom: 'var(--space-md)'
                         }}>
                             {feedback === 'correct' ? 'Doğru Bildiniz! 🎉' : 'Yanlış Cevap 😔'}
                         </div>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', fontSize: '1.1rem' }}>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', padding: '0 var(--space-sm)' }}>
                             {scenarios[currentScenario].reason}
                         </p>
                         <button

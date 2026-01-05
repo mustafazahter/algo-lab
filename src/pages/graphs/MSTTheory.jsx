@@ -5,32 +5,32 @@ import SimpleGraph from '../../components/ui/SimpleGraph';
 
 const MSTTheory = () => {
     return (
-        <div className="animate-fade-in" style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+        <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', width: '100%', maxWidth: '100%' }}>
 
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px', flexWrap: 'wrap', width: '100%' }}>
+                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)', flexShrink: 0 }}>
                     <CornerDownRight size={24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>7.2 Minimum Spanning Tree (MST)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Adalar ve Köprüler: Tüm düğümleri en az maliyetle bağlama sanatı.</p>
+                <div style={{ flex: 1, minWidth: '0' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700', wordBreak: 'break-word' }}>7.2 Minimum Spanning Tree (MST)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Adalar ve Köprüler: Tüm düğümleri en az maliyetle bağlama sanatı.</p>
                 </div>
             </div>
 
             {/* MST HİKAYESİ */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '8px', color: 'var(--primary)' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '8px', color: 'var(--primary)', flexShrink: 0 }}>
                         <Anchor size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>Hikaye: Adalar Ülkesi 🏝️</h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>Hikaye: Adalar Ülkesi 🏝️</h2>
                 </div>
 
                 <Card>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1fr', gap: '30px', alignItems: 'start' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px', alignItems: 'start', width: '100%' }}>
                         {/* Sol: Hikaye */}
-                        <div>
+                        <div style={{ width: '100%' }}>
                             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.9', fontSize: '1rem' }}>
                                 Bir <strong style={{ color: 'var(--primary)' }}>belediye başkanı</strong> olduğunuzu düşünün.
                                 Ülkenizde <strong>5 ada</strong> var ve bu adaları köprülerle birbirine bağlamanız gerekiyor.
@@ -67,7 +67,7 @@ const MSTTheory = () => {
                         </div>
 
                         {/* Sağ: Görsel */}
-                        <div>
+                        <div style={{ width: '100%', overflow: 'hidden' }}>
                             <SimpleGraph
                                 height={250}
                                 title="🗺️ Proje Taslağı: 5 Ada"
@@ -106,20 +106,20 @@ const MSTTheory = () => {
             </section>
 
             {/* MST KURALI */}
-            <section>
-                <Card style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05))' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                        <div style={{ padding: '15px', background: 'var(--primary)', borderRadius: '12px', color: 'white' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <Card style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05))', width: '100%' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
+                        <div style={{ padding: '15px', background: 'var(--primary)', borderRadius: '12px', color: 'white', flexShrink: 0 }}>
                             <GitBranch size={28} />
                         </div>
-                        <div>
+                        <div style={{ flex: 1, minWidth: '0' }}>
                             <h3 style={{ margin: 0, color: 'var(--primary)' }}>MST'nin Altın Kuralı</h3>
                             <p style={{ margin: '5px 0 0 0', color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
                                 N düğümü bağlamak için tam olarak <strong style={{ color: 'var(--primary)', fontSize: '1.3rem' }}>N-1</strong> kenar yeterlidir.
                                 Daha fazlası <strong style={{ color: 'var(--danger)' }}>döngü</strong> yaratır!
                             </p>
-                            <div style={{ marginTop: '15px', display: 'flex', gap: '20px' }}>
-                                <div style={{ flex: 1 }}>
+                            <div style={{ marginTop: '15px', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                                <div style={{ flex: 1, minWidth: '200px', overflow: 'hidden' }}>
                                     <SimpleGraph
                                         height={100}
                                         title="Döngü Var (Kötü)"
@@ -135,7 +135,7 @@ const MSTTheory = () => {
                                         ]}
                                     />
                                 </div>
-                                <div style={{ flex: 1 }}>
+                                <div style={{ flex: 1, minWidth: '200px', overflow: 'hidden' }}>
                                     <SimpleGraph
                                         height={100}
                                         title="MST (Mükemmel)"
@@ -157,18 +157,18 @@ const MSTTheory = () => {
             </section>
 
             {/* PRIM & KRUSKAL */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <h2 style={{ margin: 0 }}>MST Algoritmaları</h2>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>MST Algoritmaları</h2>
                     <Badge>Sınav İçin Kritik</Badge>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '20px', width: '100%' }}>
 
                     {/* PRIM */}
-                    <Card style={{ borderTop: '4px solid #3b82f6' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '8px', color: '#3b82f6' }}>
+                    <Card style={{ borderTop: '4px solid #3b82f6', width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '8px', color: '#3b82f6', flexShrink: 0 }}>
                                 <Share2 size={24} />
                             </div>
                             <div>
@@ -200,9 +200,9 @@ const MSTTheory = () => {
                             </ol>
                         </div>
 
-                        <div style={{ fontFamily: 'monospace', background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-medium)' }}>
-                            <div style={{ fontWeight: 'bold', marginBottom: '10px', color: '#3b82f6' }}>� Trace Örneği (A'dan Başla):</div>
-                            <pre style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.8' }}>
+                        <div style={{ fontFamily: 'monospace', background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-medium)', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                            <div style={{ fontWeight: 'bold', marginBottom: '10px', color: '#3b82f6' }}> Trace Örneği (A'dan Başla):</div>
+                            <pre style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.8', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                                 {`Başlangıç Set: {A}
 
 Adım 1: A'dan en kısa? → A-B (2) ✓
@@ -225,9 +225,9 @@ Toplam Maliyet: 2+3+2+1 = 8`}
                     </Card>
 
                     {/* KRUSKAL */}
-                    <Card style={{ borderTop: '4px solid #a855f7' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                            <div style={{ padding: '10px', background: 'rgba(168, 85, 247, 0.1)', borderRadius: '8px', color: '#a855f7' }}>
+                    <Card style={{ borderTop: '4px solid #a855f7', width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                            <div style={{ padding: '10px', background: 'rgba(168, 85, 247, 0.1)', borderRadius: '8px', color: '#a855f7', flexShrink: 0 }}>
                                 <Zap size={24} />
                             </div>
                             <div>
@@ -259,9 +259,9 @@ Toplam Maliyet: 2+3+2+1 = 8`}
                             </ol>
                         </div>
 
-                        <div style={{ fontFamily: 'monospace', background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-medium)' }}>
+                        <div style={{ fontFamily: 'monospace', background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px solid var(--border-medium)', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                             <div style={{ fontWeight: 'bold', marginBottom: '10px', color: '#a855f7' }}>📊 Trace Örneği (Sıralı Kenarlar):</div>
-                            <pre style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.8' }}>
+                            <pre style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.8', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                                 {`Sıralı Liste: D-C(1), A-B(2), E-D(2), B-E(3), A-C(4)
 
 Adım 1: D-C (1) → Döngü yok ✓ SEÇ
@@ -280,39 +280,44 @@ Toplam Maliyet: 1+2+2+3 = 8`}
             </section>
 
             {/* KARŞILAŞTIRMA TABLOSU */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <h2 style={{ margin: 0 }}>Prim vs Kruskal Karşılaştırması</h2>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>Prim vs Kruskal Karşılaştırması</h2>
                 </div>
 
                 <Card>
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
+                    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', width: '100%', maxWidth: '100%' }}>
+                        <table style={{
+                            width: '100%',
+                            borderCollapse: 'collapse',
+                            fontSize: '0.95rem',
+                            minWidth: '500px'
+                        }}>
                             <thead>
                                 <tr style={{ borderBottom: '2px solid var(--border-medium)', textAlign: 'left' }}>
-                                    <th style={{ padding: '12px', color: 'var(--text-primary)' }}>Özellik</th>
-                                    <th style={{ padding: '12px', color: '#3b82f6' }}>Prim</th>
-                                    <th style={{ padding: '12px', color: '#a855f7' }}>Kruskal</th>
+                                    <th style={{ padding: '12px', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>Özellik</th>
+                                    <th style={{ padding: '12px', color: '#3b82f6', whiteSpace: 'nowrap' }}>Prim</th>
+                                    <th style={{ padding: '12px', color: '#a855f7', whiteSpace: 'nowrap' }}>Kruskal</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold' }}>Yaklaşım</td>
+                                    <td style={{ padding: '12px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>Yaklaşım</td>
                                     <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Düğüm odaklı (genişle)</td>
                                     <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Kenar odaklı (sırala-seç)</td>
                                 </tr>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold' }}>Veri Yapısı</td>
+                                    <td style={{ padding: '12px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>Veri Yapısı</td>
                                     <td style={{ padding: '12px', fontFamily: 'monospace' }}>Priority Queue (Heap)</td>
                                     <td style={{ padding: '12px', fontFamily: 'monospace' }}>Union-Find (DSU)</td>
                                 </tr>
                                 <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold' }}>Karmaşıklık</td>
+                                    <td style={{ padding: '12px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>Karmaşıklık</td>
                                     <td style={{ padding: '12px', fontFamily: 'monospace', color: 'var(--success)' }}>O(E log V)</td>
                                     <td style={{ padding: '12px', fontFamily: 'monospace', color: 'var(--success)' }}>O(E log E)</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ padding: '12px', fontWeight: 'bold' }}>Ne Zaman Tercih?</td>
+                                    <td style={{ padding: '12px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>Ne Zaman Tercih?</td>
                                     <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Yoğun graflarda (E ≈ V²)</td>
                                     <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>Seyrek graflarda (E &lt;&lt; V²)</td>
                                 </tr>
@@ -323,21 +328,21 @@ Toplam Maliyet: 1+2+2+3 = 8`}
             </section>
 
             {/* DİĞER ALGORİTMALAR */}
-            <section>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                    <div style={{ padding: '10px', background: 'rgba(236, 72, 153, 0.1)', borderRadius: '8px', color: 'var(--accent)' }}>
+            <section style={{ width: '100%', maxWidth: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
+                    <div style={{ padding: '10px', background: 'rgba(236, 72, 153, 0.1)', borderRadius: '8px', color: 'var(--accent)', flexShrink: 0 }}>
                         <ArrowRight size={24} />
                     </div>
-                    <h2 style={{ margin: 0 }}>7.3. Diğer Efsanevi Algoritmalar</h2>
+                    <h2 style={{ margin: 0, fontSize: '1.5rem', wordBreak: 'break-word' }}>7.3. Diğer Efsanevi Algoritmalar</h2>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', width: '100%' }}>
 
                     {/* BORUVKA */}
-                    <Card>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1.5fr', gap: '30px', alignItems: 'start' }}>
-                            <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px', alignItems: 'start', width: '100%' }}>
+                            <div style={{ width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
                                     <h3 style={{ margin: 0, color: 'var(--warning)' }}>1. Boruvka Algoritması</h3>
                                     <Badge type="warning">Paralel MST</Badge>
                                 </div>
@@ -354,7 +359,7 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                                     </ul>
                                 </div>
                             </div>
-                            <div>
+                            <div style={{ width: '100%', overflow: 'hidden' }}>
                                 <SimpleGraph
                                     height={200}
                                     title="Çoklu İşlem (Aynı anda birleşme)"
@@ -376,10 +381,10 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                     </Card>
 
                     {/* DIJKSTRA */}
-                    <Card>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1.5fr', gap: '30px', alignItems: 'start' }}>
-                            <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px', alignItems: 'start', width: '100%' }}>
+                            <div style={{ width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
                                     <h3 style={{ margin: 0, color: 'var(--accent)' }}>2. Dijkstra Algoritması</h3>
                                     <Badge type="primary">En Kısa Yol</Badge>
                                 </div>
@@ -395,7 +400,7 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                                     </p>
                                 </div>
                             </div>
-                            <div>
+                            <div style={{ width: '100%', overflow: 'hidden' }}>
                                 <SimpleGraph
                                     height={200}
                                     title="Navigasyon Rotası (A'dan C'ye)"
@@ -418,10 +423,10 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                     </Card>
 
                     {/* BELLMAN-FORD */}
-                    <Card>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1.5fr', gap: '30px', alignItems: 'start' }}>
-                            <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px', alignItems: 'start', width: '100%' }}>
+                            <div style={{ width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
                                     <h3 style={{ margin: 0, color: 'var(--danger)' }}>3. Bellman-Ford Algoritması</h3>
                                     <Badge type="danger">Negatif Dedektifi</Badge>
                                 </div>
@@ -436,7 +441,7 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                                     </p>
                                 </div>
                             </div>
-                            <div>
+                            <div style={{ width: '100%', overflow: 'hidden' }}>
                                 <SimpleGraph
                                     height={200}
                                     title="Zaman Kazandıran Negatif Yol"
@@ -456,10 +461,10 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                     </Card>
 
                     {/* EDMONDS-KARP */}
-                    <Card>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1.5fr', gap: '30px', alignItems: 'start' }}>
-                            <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+                    <Card style={{ width: '100%' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px', alignItems: 'start', width: '100%' }}>
+                            <div style={{ width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px', flexWrap: 'wrap' }}>
                                     <h3 style={{ margin: 0, color: 'var(--primary)' }}>4. Edmonds-Karp (Max Flow)</h3>
                                     <Badge type="primary">Maksimum Akış</Badge>
                                 </div>
@@ -477,7 +482,7 @@ Toplam Maliyet: 1+2+2+3 = 8`}
                                     </ul>
                                 </div>
                             </div>
-                            <div>
+                            <div style={{ width: '100%', overflow: 'hidden' }}>
                                 <SimpleGraph
                                     height={200}
                                     title="Su Borusu Kapasitesi"

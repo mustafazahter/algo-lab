@@ -37,13 +37,13 @@ const Greedy = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.4 Açgözlü Yaklaşım (Greedy)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Her adımda, o an için en kazançlı görünen seçeneği tercih ederek sonuca ulaşma stratejisi.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>2.4 Açgözlü Yaklaşım (Greedy)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Her adımda, o an için en kazançlı görünen seçeneği tercih ederek sonuca ulaşma stratejisi.</p>
                 </div>
             </div>
 
@@ -69,45 +69,54 @@ const Greedy = () => {
                 </Card>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--space-lg)' }}>
-                <h2 style={{ fontSize: '1.8rem', margin: 0 }}>Simülasyon: Para Üstü Verme</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: 'var(--space-lg)', flexWrap: 'wrap' }}>
+                <h2 className="text-subheading" style={{ margin: 0 }}>Simülasyon: Para Üstü Verme</h2>
                 <Badge type="success" icon={Coins}>Greedy Problems</Badge>
             </div>
 
             <Card>
-                <div style={{ display: 'flex', gap: 'var(--space-md)', alignItems: 'center', marginBottom: 'var(--space-xl)', flexWrap: 'wrap' }}>
-                    <div style={{ fontSize: '1.2rem', fontWeight: 600 }}>Hedef Tutar:</div>
+                <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 16px)', alignItems: 'center', marginBottom: 'var(--space-xl)', flexWrap: 'wrap' }}>
+                    <div className="text-body" style={{ fontWeight: 600 }}>Hedef Tutar:</div>
                     <input
                         type="number"
                         value={target}
                         onChange={e => setTarget(Number(e.target.value))}
                         disabled={isCalculating}
                         style={{
-                            fontSize: '1.5rem', width: '120px',
-                            background: 'var(--bg-secondary)', color: 'var(--text-primary)',
-                            border: '1px solid var(--border-light)', padding: '8px', borderRadius: 'var(--radius-sm)'
+                            fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
+                            width: 'clamp(100px, 25vw, 120px)',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            border: '1px solid var(--border-light)',
+                            padding: 'clamp(6px, 2vw, 8px)',
+                            borderRadius: 'var(--radius-sm)'
                         }}
                     />
                     <button
                         onClick={calculate}
                         disabled={isCalculating}
                         style={{
-                            padding: '12px 24px',
-                            background: 'var(--success)', color: 'white',
-                            borderRadius: 'var(--radius-md)', fontWeight: 'bold',
+                            padding: 'clamp(10px, 2.5vw, 12px) clamp(18px, 4vw, 24px)',
+                            background: 'var(--success)',
+                            color: 'white',
+                            borderRadius: 'var(--radius-md)',
+                            fontWeight: 'bold',
+                            fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                             opacity: isCalculating ? 0.7 : 1,
-                            display: 'flex', alignItems: 'center', gap: '8px'
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px'
                         }}
                     >
                         HESAPLA <ArrowRight size={18} />
                     </button>
                 </div>
 
-                <div style={{ display: 'flex', gap: 'var(--space-2xl)', flexDirection: window.innerWidth < 768 ? 'column' : 'row' }}>
+                <div style={{ display: 'flex', gap: 'clamp(16px, 4vw, 40px)', flexDirection: window.innerWidth < 768 ? 'column' : 'row' }}>
                     {/* Kasa */}
-                    <div style={{ width: '200px' }}>
+                    <div style={{ width: window.innerWidth < 768 ? '100%' : '200px' }}>
                         <div style={{ marginBottom: '12px', color: 'var(--text-secondary)', fontWeight: 600 }}>Kasa (Birimler)</div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'row' : 'column', gap: '10px', flexWrap: 'wrap', justifyContent: window.innerWidth < 768 ? 'center' : 'flex-start' }}>
                             {COINS.map(c => (
                                 <div key={c} style={{
                                     padding: '10px',

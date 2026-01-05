@@ -215,13 +215,13 @@ const SortVisualizer = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>6.3. Sıralama Görselleştirici</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Algoritmaların adım adım diziyi nasıl sıraladığını canlı izleyin.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>6.3. Sıralama Görselleştirici</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Algoritmaların adım adım diziyi nasıl sıraladığını canlı izleyin.</p>
                 </div>
             </div>
 
@@ -230,7 +230,7 @@ const SortVisualizer = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
 
                         {/* 1. ROW: LEJANT */}
-                        <div style={{ display: 'flex', gap: '20px', alignItems: 'center', paddingBottom: '10px', borderBottom: '1px solid var(--border-light)', fontSize: '0.8rem' }}>
+                        <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 20px)', alignItems: 'center', paddingBottom: '10px', borderBottom: '1px solid var(--border-light)', fontSize: 'clamp(0.7rem, 2vw, 0.8rem)', flexWrap: 'wrap' }}>
                             <span style={{ fontWeight: 'bold', color: 'var(--text-secondary)' }}>DURUMLAR:</span>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: COLORS.compare }}></div>
@@ -247,17 +247,17 @@ const SortVisualizer = () => {
                         </div>
 
                         {/* 2. ROW: CONTROLS */}
-                        <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', gap: 'clamp(10px, 2vw, 15px)', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', gap: 'clamp(10px, 2vw, 15px)', alignItems: 'center', flexWrap: 'wrap', flex: '1 1 auto', minWidth: '0' }}>
                                 {/* Mode Toggle */}
-                                <div style={{ display: 'flex', gap: '2px', background: 'var(--bg-primary)', padding: '2px', borderRadius: '6px' }}>
+                                <div style={{ display: 'flex', gap: '2px', background: 'var(--bg-primary)', padding: '2px', borderRadius: '6px', flexShrink: 0 }}>
                                     {['bars', 'rainbow', 'dots'].map(m => (
                                         <button
                                             key={m}
                                             onClick={() => setVisualMode(m)}
                                             disabled={isRunning}
                                             style={{
-                                                padding: '6px',
+                                                padding: 'clamp(4px, 1.5vw, 6px)',
                                                 borderRadius: '4px',
                                                 border: 'none',
                                                 background: visualMode === m ? 'var(--bg-card)' : 'transparent',
@@ -265,34 +265,44 @@ const SortVisualizer = () => {
                                                 cursor: 'pointer',
                                                 opacity: isRunning ? 0.5 : 1
                                             }}>
-                                            {m === 'bars' && <BarChart2 size={16} color={visualMode === m ? 'var(--primary)' : 'var(--text-secondary)'} />}
-                                            {m === 'rainbow' && <Palette size={16} color={visualMode === m ? 'orange' : 'var(--text-secondary)'} />}
-                                            {m === 'dots' && <Circle size={16} color={visualMode === m ? 'var(--accent)' : 'var(--text-secondary)'} />}
+                                            {m === 'bars' && <BarChart2 size={window.innerWidth <= 768 ? 14 : 16} color={visualMode === m ? 'var(--primary)' : 'var(--text-secondary)'} />}
+                                            {m === 'rainbow' && <Palette size={window.innerWidth <= 768 ? 14 : 16} color={visualMode === m ? 'orange' : 'var(--text-secondary)'} />}
+                                            {m === 'dots' && <Circle size={window.innerWidth <= 768 ? 14 : 16} color={visualMode === m ? 'var(--accent)' : 'var(--text-secondary)'} />}
                                         </button>
                                     ))}
                                 </div>
 
-                                <div style={{ height: '20px', width: '1px', background: 'var(--border-light)' }}></div>
+                                {window.innerWidth > 768 && <div style={{ height: '20px', width: '1px', background: 'var(--border-light)' }}></div>}
 
-                                <div style={{ display: 'flex', gap: '15px' }}>
-                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <label style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Boyut: {arraySize}</label>
-                                        <input type="range" min="10" max="150" value={arraySize} onChange={(e) => setArraySize(parseInt(e.target.value))} disabled={isRunning} style={{ width: '80px' }} />
+                                <div style={{ display: 'flex', gap: 'clamp(10px, 2vw, 15px)', flexWrap: 'wrap' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', minWidth: 'clamp(70px, 20vw, 90px)' }}>
+                                        <label style={{ fontSize: 'clamp(0.6rem, 1.5vw, 0.65rem)', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>Boyut: {arraySize}</label>
+                                        <input type="range" min="10" max="150" value={arraySize} onChange={(e) => setArraySize(parseInt(e.target.value))} disabled={isRunning} style={{ width: '100%' }} />
                                     </div>
-                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <label style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Hız: {speed}ms</label>
-                                        <input type="range" min="1" max="200" step="5" value={speed} onChange={(e) => setSpeed(parseInt(e.target.value))} style={{ width: '80px', direction: 'rtl' }} />
+                                    <div style={{ display: 'flex', flexDirection: 'column', minWidth: 'clamp(70px, 20vw, 90px)' }}>
+                                        <label style={{ fontSize: 'clamp(0.6rem, 1.5vw, 0.65rem)', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>Hız: {speed}ms</label>
+                                        <input type="range" min="1" max="200" step="5" value={speed} onChange={(e) => setSpeed(parseInt(e.target.value))} style={{ width: '100%', direction: 'rtl' }} />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Actions */}
-                            <div style={{ display: 'flex', gap: '10px' }}>
+                            <div style={{ display: 'flex', gap: 'clamp(6px, 2vw, 10px)', flexWrap: 'wrap', justifyContent: 'center', width: window.innerWidth <= 768 ? '100%' : 'auto' }}>
                                 <select
                                     value={algorithm}
                                     onChange={(e) => setAlgorithm(e.target.value)}
                                     disabled={isRunning}
-                                    style={{ padding: '8px', borderRadius: '6px', background: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)', fontWeight: 'bold' }}
+                                    style={{
+                                        padding: 'clamp(6px, 2vw, 8px)',
+                                        borderRadius: '6px',
+                                        background: 'var(--bg-primary)',
+                                        color: 'var(--text-primary)',
+                                        border: '1px solid var(--border-medium)',
+                                        fontWeight: 'bold',
+                                        fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
+                                        flex: window.innerWidth <= 768 ? '1 1 auto' : '0 0 auto',
+                                        minWidth: 'clamp(120px, 35vw, 150px)'
+                                    }}
                                 >
                                     <option value="bubble">Bubble Sort</option>
                                     <option value="selection">Selection Sort</option>
@@ -301,14 +311,14 @@ const SortVisualizer = () => {
                                     <option value="quick">Quick Sort</option>
                                 </select>
 
-                                <button onClick={resetArray} disabled={isRunning} style={{ padding: '8px', borderRadius: '6px', background: 'var(--bg-secondary)', color: 'var(--text-primary)', border: '1px solid var(--border-light)', cursor: 'pointer' }}>
-                                    <RotateCcw size={18} />
+                                <button onClick={resetArray} disabled={isRunning} style={{ padding: 'clamp(6px, 2vw, 8px)', borderRadius: '6px', background: 'var(--bg-secondary)', color: 'var(--text-primary)', border: '1px solid var(--border-light)', cursor: 'pointer', flexShrink: 0 }}>
+                                    <RotateCcw size={window.innerWidth <= 768 ? 16 : 18} />
                                 </button>
 
                                 <button
                                     onClick={handleStart}
                                     style={{
-                                        padding: '8px 20px',
+                                        padding: 'clamp(6px, 2vw, 8px) clamp(16px, 4vw, 20px)',
                                         borderRadius: '6px',
                                         background: isRunning ? 'var(--danger)' : 'var(--primary)',
                                         color: 'white',
@@ -318,10 +328,12 @@ const SortVisualizer = () => {
                                         alignItems: 'center',
                                         gap: '5px',
                                         fontWeight: 'bold',
-                                        minWidth: '100px',
-                                        justifyContent: 'center'
+                                        fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
+                                        minWidth: 'clamp(90px, 25vw, 100px)',
+                                        justifyContent: 'center',
+                                        flex: window.innerWidth <= 768 ? '1 1 auto' : '0 0 auto'
                                     }}>
-                                    {isRunning ? <><Square size={16} fill="white" /> DUR (Reset)</> : <><Play size={18} /> BAŞLAT</>}
+                                    {isRunning ? <><Square size={window.innerWidth <= 768 ? 14 : 16} fill="white" /> DUR</> : <><Play size={window.innerWidth <= 768 ? 16 : 18} /> BAŞLAT</>}
                                 </button>
                             </div>
                         </div>
@@ -332,9 +344,9 @@ const SortVisualizer = () => {
             <div
                 ref={containerRef}
                 style={{
-                    height: '500px',
+                    height: 'clamp(350px, 80vw, 500px)',
                     background: 'var(--bg-card)',
-                    padding: '20px',
+                    padding: 'clamp(12px, 3vw, 20px)',
                     borderRadius: '12px',
                     border: '1px solid var(--border-light)',
                     display: 'flex',

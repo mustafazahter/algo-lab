@@ -67,13 +67,13 @@ const BruteForce = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.1 Kaba Kuvvet (Brute Force)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Zeka veya strateji kullanmadan, olası tüm çözüm adaylarını tek tek deneyerek sonuca ulaşma yöntemidir.</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>2.1 Kaba Kuvvet (Brute Force)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>Zeka veya strateji kullanmadan, olası tüm çözüm adaylarını tek tek deneyerek sonuca ulaşma yöntemidir.</p>
                 </div>
             </div>
 
@@ -112,12 +112,12 @@ const BruteForce = () => {
             </div>
 
             {/* SİMÜLASYON */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--space-lg)' }}>
-                <h2 style={{ fontSize: '1.8rem', margin: 0 }}>Simülasyon: PIN Kırıcı</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: 'var(--space-lg)', flexWrap: 'wrap' }}>
+                <h2 className="text-subheading" style={{ margin: 0 }}>Simülasyon: PIN Kırıcı</h2>
                 <Badge type="warning" icon={Zap}>CPU Yoğun İşlem</Badge>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1fr', gap: 'var(--space-lg)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth <= 1024 ? '1fr' : 'minmax(300px, 1fr) 1fr', gap: 'clamp(16px, 3vw, 24px)' }}>
                 {/* Kontrol Paneli */}
                 <Card>
                     <h4 style={{ marginBottom: 'var(--space-md)', color: 'var(--text-secondary)' }}>1. Hedef Şifreyi Belirleyin</h4>
@@ -164,7 +164,7 @@ const BruteForce = () => {
                         {isCracking ? <><RotateCcw size={20} /> Durdur</> : <><Unlock size={20} /> Kırmaya Başla</>}
                     </button>
 
-                    <p style={{ marginTop: 'var(--space-md)', fontSize: '0.9rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+                    <p style={{ marginTop: 'var(--space-md)', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'var(--text-muted)', textAlign: 'center' }}>
                         4 hane = 10,000 olasılık<br />
                         Ortalama 5,000 denemede bulunur.
                     </p>
@@ -186,12 +186,12 @@ const BruteForce = () => {
                     </div>
 
                     <div style={{
-                        fontSize: '5rem',
+                        fontSize: 'clamp(3rem, 12vw, 5rem)',
                         fontFamily: 'monospace',
                         fontWeight: 'bold',
                         color: found ? 'var(--success)' : isCracking ? 'var(--text-primary)' : 'var(--text-muted)',
                         marginBottom: 'var(--space-lg)',
-                        letterSpacing: '8px'
+                        letterSpacing: 'clamp(4px, 2vw, 8px)'
                     }}>
                         {currentAttempt}
                     </div>

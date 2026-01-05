@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Card } from '../../components/ui/Common';
 import { CornerDownRight, Play, RotateCcw, Swords, Square, RefreshCw } from 'lucide-react';
 import {
     getBubbleSortAnimations,

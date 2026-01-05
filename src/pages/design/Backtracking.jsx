@@ -102,13 +102,13 @@ const Backtracking = () => {
     return (
         <div className="animate-fade-in">
             {/* Alt Başlık Bölümü */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                <div style={{ padding: '10px', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
-                    <CornerDownRight size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 12px)', marginBottom: '25px', flexWrap: 'wrap' }}>
+                <div style={{ padding: 'clamp(8px, 2vw, 10px)', background: 'rgba(59,130,246,0.1)', borderRadius: '10px', color: 'var(--primary)' }}>
+                    <CornerDownRight size={window.innerWidth <= 768 ? 20 : 24} />
                 </div>
-                <div>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>2.6 Geri İzleme (Backtracking)</h2>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>"Çıkmaz sokağa girdiğinde, geldiğin yoldan geri dön ve başka bir sokağa sap."</p>
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <h2 className="text-subheading" style={{ margin: 0, fontWeight: '700' }}>2.6 Geri İzleme (Backtracking)</h2>
+                    <p className="text-small" style={{ margin: 0, color: 'var(--text-secondary)' }}>" Çıkmaz sokağa girdiğinde, geldiğin yoldan geri dön ve başka bir sokağa sap."</p>
                 </div>
             </div>
 
@@ -121,21 +121,23 @@ const Backtracking = () => {
                 </Card>
             </div>
 
-            <h2 style={{ fontSize: '1.8rem', marginBottom: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <CheckCircle2 size={32} color="var(--success)" />
+            <h2 className="text-subheading" style={{ marginBottom: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                <CheckCircle2 size={window.innerWidth <= 768 ? 24 : 32} color="var(--success)" />
                 4 Vezir Problemi Görselleştirme
             </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 'var(--space-lg)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth <= 1024 ? '1fr' : '1fr 300px', gap: 'clamp(16px, 3vw, 24px)' }}>
                 <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
 
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: `repeat(${N}, 70px)`,
-                        gridTemplateRows: `repeat(${N}, 70px)`,
+                        gridTemplateColumns: `repeat(${N}, clamp(50px, 15vw, 70px))`,
+                        gridTemplateRows: `repeat(${N}, clamp(50px, 15vw, 70px))`,
                         border: '4px solid var(--border-medium)',
                         marginBottom: 'var(--space-xl)',
-                        position: 'relative'
+                        position: 'relative',
+                        maxWidth: '100%',
+                        margin: '0 auto var(--space-xl) auto'
                     }}>
                         {board.map((rowArr, rIdx) => (
                             rowArr.map((hasQueen, cIdx) => {
@@ -157,10 +159,13 @@ const Backtracking = () => {
 
                                 return (
                                     <div key={`${rIdx}-${cIdx}`} style={{
-                                        width: '70px', height: '70px',
+                                        width: 'clamp(50px, 15vw, 70px)',
+                                        height: 'clamp(50px, 15vw, 70px)',
                                         backgroundColor: bgColor,
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        fontSize: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: 'clamp(1.5rem, 6vw, 2.5rem)',
                                         transition: 'background-color 0.3s',
                                         border: isChecking ? '2px solid var(--primary)' : '1px solid rgba(255,255,255,0.05)',
                                         color: hasQueen ? 'var(--text-primary)' : 'transparent'
